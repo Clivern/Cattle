@@ -15,22 +15,15 @@
 from django.db import models
 
 
-class Task(models.Model):
-
-    PENDING = "pending"
-    FAILED = "failed"
-    SUCCEEDED = "succeeded"
-
-    STATUS_CHOICES = (
-        ('pending', PENDING),
-        ('failed', FAILED),
-        ('succeeded', SUCCEEDED)
-    )
+class Code(models.Model):
+    """Code Model"""
 
     uuid = models.CharField(max_length=60, db_index=True, verbose_name="UUID")
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending", verbose_name="Status")
-    payload = models.TextField(verbose_name="payload")
-    result = models.TextField(verbose_name="Result")
+    slug = models.CharField(max_length=60, db_index=True, verbose_name="Slug")
+    token = models.CharField(max_length=60, db_index=True, verbose_name="Token")
+    language = models.CharField(max_length=20, verbose_name="Language")
+    version = models.CharField(max_length=20, verbose_name="Version")
+    content = models.TextField(verbose_name="Content")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created at")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated at")
 
@@ -38,4 +31,4 @@ class Task(models.Model):
         return self.uuid
 
     class Meta:
-        db_table = "app_task"
+        db_table = "app_code"

@@ -14,3 +14,4 @@
 
 from .option import Option                                                        # noqa: F401
 from .task import Task                                                            # noqa: F401
+from .code import Code                                                            # noqa: F401

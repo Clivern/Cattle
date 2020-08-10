@@ -12,32 +12,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import base64
+import random
+import string
 
 
-class Encoder():
-    """Encoder Class"""
+class Random():
+    """Random Class"""
 
-    def b64encode(self, text):
+    @classmethod
+    def token(cls, length):
         """
-        Encode text
+        Generate a Token
 
         Args:
-            text: the text to encode
+            cls: class instance
+            length: the length
 
         Returns:
-            The base64 encoded test
+            The random string
         """
-        return str(base64.b64encode(bytes(text, 'utf-8')), "utf-8")
+        characters = string.ascii_letters + string.digits
 
-    def b64decode(self, encoded):
+        return ''.join(random.choice(characters) for i in range(length)).lower()
+
+    @classmethod
+    def rand_int(cls, min, max):
         """
-        Decode encoded text
+        Generate a Random Int
 
         Args:
-            encoded: the encoded text
+            cls: class instance
+            min: the min int
+            max: the max int
 
         Returns:
-            The base64 decoded test
+            The random int
         """
-        return base64.b64decode(encoded).decode("utf-8")
+        return random.randint(min, max)

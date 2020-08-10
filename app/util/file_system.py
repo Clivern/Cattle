@@ -21,10 +21,14 @@ class FileSystem():
     """FileSystem Class"""
 
     def read_file(self, file_path):
-        """Read file content
+        """
+        Read file content
 
         Args:
             file_path: The file path
+
+        Returns:
+            The file content
         """
 
         f = open(file_path, "r")
@@ -32,19 +36,21 @@ class FileSystem():
         return f.read()
 
     def open_file(self, file_path):
-        """Open a file for read
+        """
+        Open a file for read
 
         Args:
             file_path: The file path
 
-        Return:
+        Returns:
             the opened file handler
         """
 
         return open(file_path, "r")
 
     def write_file(self, file_path, content):
-        """Write content to a file
+        """
+        Write content to a file
 
         Args:
             file_path: The file path
@@ -56,7 +62,8 @@ class FileSystem():
         f.close()
 
     def delete_file(self, file_path):
-        """Delete a file
+        """
+        Delete a file
 
         Args:
             file_path: The file path
@@ -64,25 +71,37 @@ class FileSystem():
         os.remove(file_path)
 
     def storage_path(self, rel_file_path):
-        """Get absolute path for a file or dir inside storage dir
+        """
+        Get absolute path for a file or dir inside storage dir
 
         Args:
             rel_file_path: Relative file path from the root
+
+        Returns:
+            The storage path
         """
         return APP_ROOT + "/storage/" + rel_file_path.lstrip("/")
 
     def files_path(self, rel_file_path):
-        """Get absolute path for a file or dir inside files dir
+        """
+        Get absolute path for a file or dir inside files dir
 
         Args:
             rel_file_path: Relative file path from the root
+
+        Returns:
+            The files path
         """
         return APP_ROOT + "/files/" + rel_file_path.lstrip("/")
 
     def app_path(self, rel_file_path):
-        """Get absolute path for a file or dir inside application dir
+        """
+        Get absolute path for a file or dir inside application dir
 
         Args:
             rel_file_path: Relative file path from the root
+
+        Returns:
+            The app path
         """
         return APP_ROOT + "/" + rel_file_path.lstrip("/")

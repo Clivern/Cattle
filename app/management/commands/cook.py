@@ -12,27 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import logging
+from django.core.management.base import BaseCommand
 
 
-class Logger():
-    """Logger Class"""
+class Command(BaseCommand):
+    """Django command for Testing"""
 
-    loggers = {}
+    help = "Testing"
 
-    def get_logger(self, name=__name__):
-        """
-        Get logger instance by name
-
-        Args:
-            name: logger identifier
-
-        Returns:
-            An instance of logging.Logger
-        """
-        if name in self.loggers:
-            return self.loggers[name]
-
-        self.loggers[name] = logging.getLogger(name)
-
-        return self.loggers[name]
+    def handle(self, *args, **options):
+        """Handle the command"""
+        pass

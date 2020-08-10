@@ -16,19 +16,15 @@ from app.models import Task
 
 
 class TaskRepository():
-    """
-    Task Repository class
-
-    It encapsulate the logic required to access stored tasks
-    """
+    """Task Repository"""
 
     PENDING = "pending"
     FAILED = "failed"
     SUCCEEDED = "succeeded"
-    ERROR = "error"
 
     def insert_one(self, task):
-        """Insert Task
+        """
+        Insert Task
 
         Args:
             task: a dict of task data.
@@ -42,11 +38,13 @@ class TaskRepository():
             payload=task["payload"],
             result=task["result"]
         )
+
         task.save()
         return task
 
     def get_one_by_id(self, id):
-        """Get Task By ID
+        """
+        Get Task By ID
 
         Args:
             id: the task id.
@@ -61,7 +59,8 @@ class TaskRepository():
             return False
 
     def get_one_by_uuid(self, uuid):
-        """Get Task By uuid
+        """
+        Get Task By uuid
 
         Args:
             uuid: the task uuid.
@@ -76,7 +75,8 @@ class TaskRepository():
             return False
 
     def get_many_by_status(self, status):
-        """Get Many Tasks By Status
+        """
+        Get Many Tasks By Status
 
         Args:
             status: the task status.
@@ -87,7 +87,8 @@ class TaskRepository():
         return Task.objects.filter(status=status)
 
     def update_one_by_id(self, id, new_data):
-        """Update Task By ID
+        """
+        Update Task By ID
 
         Args:
             id: the task ID.
@@ -97,9 +98,8 @@ class TaskRepository():
             A boolean representing the success of the operation
         """
         task = self.get_one_by_id(id)
+
         if task is not False:
-            if "uuid" in new_data:
-                task.uuid = new_data["uuid"]
             if "status" in new_data:
                 task.status = new_data["status"]
             if "payload" in new_data:
@@ -109,16 +109,31 @@ class TaskRepository():
 
             task.save()
             return True
+
         return False
 
-    def get_many_by_status_and_payload(self, status, payload):
-        """Get Many Tasks By status and file key
+    def update_one_by_uuid(self, uuid, new_data):
+        """
+        Update Task By UUID
 
         Args:
-            status: the task status.
-            payload: match a value on the payload
+            uuid: the task UUID.
+            new_data: a dict of task new data.
 
         Returns:
-            A list of tasks with the provided status and file key
+            A boolean representing the success of the operation
         """
-        return Task.objects.filter(status=status, payload__contains=payload)
+        task = self.get_one_by_uuid(uuid)
+
+        if task is not False:
+            if "status" in new_data:
+                task.status = new_data["status"]
+            if "payload" in new_data:
+                task.payload = new_data["payload"]
+            if "result" in new_data:
+                task.result = new_data["result"]
+
+            task.save()
+            return True
+
+        return False

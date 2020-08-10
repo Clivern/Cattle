@@ -24,18 +24,15 @@ from app.util.logger import Logger
 
 
 class Validator():
-    """Validator Class
-
-    Attributes:
-        logger: An instance of Logger class
-    """
+    """Validator Class"""
 
     def __init__(self):
         """Inits Validator"""
         self.logger = Logger().get_logger(__name__)
 
     def validate(self, data, schema_path):
-        """Validate data against JSON schema
+        """
+        Validate data against JSON schema
 
         Args:
             data: A JSON or dict to validate
@@ -70,7 +67,8 @@ class Validator():
         return True
 
     def get_schema_path(self, rel_path):
-        """Get absolute path to JSON schema file
+        """
+        Get absolute path to JSON schema file
 
         Args:
             rel_path: a relative path to JSON schema file from app root
@@ -81,7 +79,8 @@ class Validator():
         return "{root}{rel_path}".format(root=APP_ROOT, rel_path=rel_path)
 
     def get_error(self):
-        """Get validation error message
+        """
+        Get validation error message
 
         Returns:
             An error or empty string
@@ -89,7 +88,8 @@ class Validator():
         return self.error
 
     def is_positive_integer(self, value, min=0):
-        """Validate if a value is integer and more than a certain value
+        """
+        Validate if a value is integer and more than a certain value
 
         Args:
             value: the value to validate

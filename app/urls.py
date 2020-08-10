@@ -18,12 +18,10 @@ from django.urls import include, path
 from app.controllers.web.home import Home
 from app.controllers.web.ready import Ready
 from app.controllers.web.health import Health
-from app.controllers.api.v1.code import GetJob
-from app.controllers.api.v1.code import GetCode
+from app.controllers.api.v1.code import GetTask
 from app.controllers.api.v1.code import RunCode
 from app.controllers.api.v1.code import CreateCode
-from app.controllers.api.v1.code import UpdateCode
-from app.controllers.api.v1.code import DeleteCode
+from app.controllers.api.v1.code import CodeAction
 from app.controllers.api.v1.code import ExecuteCode
 from app.controllers.web.error import handler404 as handler404_view
 from app.controllers.web.error import handler500 as handler500_view
@@ -41,17 +39,19 @@ urlpatterns = [
 
         # POST /api/v1/code
         path('code', CreateCode.as_view(), name='app.api.v1.create_code.endpoint'),
-        # GET /api/v1/code/<uuid>
-        path('code/<uuid>', GetCode.as_view(), name='app.api.v1.get_code.endpoint'),
-        # PUT /api/v1/code/<uuid>
-        path('code/<uuid>', UpdateCode.as_view(), name='app.api.v1.update_code.endpoint'),
-        # DELETE /api/v1/code/<uuid>
-        path('code/<uuid>', DeleteCode.as_view(), name='app.api.v1.delete_code.endpoint'),
-        # POST /api/v1/code/<uuid>/run
-        path('code/<uuid>/run', RunCode.as_view(), name='app.api.v1.run_code.endpoint'),
 
-        # GET /api/v1/job/<uuid>
-        path('job/<uuid>', GetJob.as_view(), name='app.api.v1.get_job.endpoint'),
+        # GET /api/v1/code/<id>
+        path('code/<id>', CodeAction.as_view(), name='app.api.v1.get_code.endpoint'),
+        # PUT /api/v1/code/<id>
+        path('code/<id>', CodeAction.as_view(), name='app.api.v1.update_code.endpoint'),
+        # DELETE /api/v1/code/<id>
+        path('code/<id>', CodeAction.as_view(), name='app.api.v1.delete_code.endpoint'),
+
+        # POST /api/v1/code/<id>/run
+        path('code/<id>/run', RunCode.as_view(), name='app.api.v1.run_code.endpoint'),
+
+        # GET /api/v1/task/<id>
+        path('task/<id>', GetTask.as_view(), name='app.api.v1.get_task.endpoint'),
     ])),
 ]
 

@@ -4,10 +4,10 @@
    "title":"createEntityEndpoint",
    "type":"object",
    "properties":{
-      "code":{
-         "id":"code",
+      "content":{
+         "id":"content",
          "type":"string",
-         "description":"The code",
+         "description":"The code content",
          "minLength":1,
          "maxLength":60000
       },
@@ -84,7 +84,7 @@
       }
    },
    "required":[
-      "code",
+      "content",
       "language",
       "version"
    ]

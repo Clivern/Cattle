@@ -47,7 +47,6 @@ lint: lint-pycodestyle lint-flake8
 .PHONY: test
 test:
 	@echo "\n>> ============= Run Test Cases ============= <<"
-	export CALVIN_TEST_RUN=true
 	$(PYTHON) manage.py test
 
 
