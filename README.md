@@ -3,8 +3,11 @@
     <h3 align="center">Cattle</h3>
     <p align="center">A Platform to Run and Share Code.</p>
     <p align="center">
-        <a href="https://github.com/Clivern/Cattle/actions/workflows/lgtm.yml">
-            <img src="https://github.com/Clivern/Cattle/actions/workflows/lgtm.yml/badge.svg"/>
+        <a href="https://github.com/Clivern/Cattle/actions/workflows/api.yml">
+            <img src="https://github.com/Clivern/Cattle/actions/workflows/api.yml/badge.svg"/>
+        </a>
+        <a href="https://github.com/Clivern/Cattle/actions/workflows/ui.yml">
+            <img src="https://github.com/Clivern/Cattle/actions/workflows/ui.yml/badge.svg"/>
         </a>
     </p>
 </p>
