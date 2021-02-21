@@ -19,6 +19,8 @@
 
 Cattle is a `django` based web application. It uses `mysql` as a datastore, `redis` for Async workload and `docker` with [gvisor](https://github.com/google/gvisor) to spin isolated environments to run the code.
 
+## Notice
+
 ***Due to unforeseen events, we decided to tear down the [publicly hosted version of cattle](https://cattle.sh). Please feel free to host your own as explained below!***
 
 
