@@ -13,7 +13,7 @@
 </p>
 <br/>
 <p align="center">
-    <img src="/assets/img/screenshot_1.png?v=0.1.0" width="100%" />
+    <img src="/assets/img/screenshot.png?v=0.1.0" width="100%" />
 </p>
 
 
@@ -21,7 +21,7 @@ Cattle is a `django` based web application. It uses `mysql` as a datastore, `red
 
 ## Notice
 
-***Due to unforeseen events, we decided to tear down the publicly hosted version of cattle (`cattle.sh`). Please feel free to host your own as explained below!***
+***Due to unforeseen events, I stopped the publicly hosted version of cattle (`cattle.sh`). Please feel free to host your own as explained below!***
 
 
 ## Deployment
