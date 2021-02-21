@@ -11,8 +11,15 @@
         </a>
     </p>
 </p>
+<br/>
+<p align="center">
+    <img src="/assets/img/screenshot_1.png?v=0.1.0" width="90%" />
+</p>
+
 
 Cattle is a `django` based web application. It uses `mysql` as a datastore, `redis` for Async workload and `docker` with [gvisor](https://github.com/google/gvisor) to spin isolated environments to run the code.
+
+***Due to unforeseen events, we decided to stop the [publicly hosted version of cattle](https://cattle.sh). Please feel free to host your own as explained below!***
 
 
 ## Deployment
