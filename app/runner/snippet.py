@@ -96,6 +96,12 @@ class Snippet():
         elif self._language == "rust":
             code = Runner.rust(self._content, self._version, self._id)
 
+        elif self._language == "c":
+            code = Runner.c(self._content, self._version, self._id)
+
+        elif self._language == "cplus":
+            code = Runner.cplus(self._content, self._version, self._id)
+
         else:
             self.logger.error("Invalid programming language {}".format(self._language))
             raise Exception("Invalid programming language {}".format(self._language))

@@ -29,4 +29,5 @@ class Home(View, Controller):
             "title": get_config("app_name", "Cattle"),
             "description": get_config("app_description", ""),
             "base_url": get_config("app_url", ""),
+            "google_id": get_config("google_analytics_id", ""),
         })

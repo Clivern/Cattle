@@ -28,6 +28,8 @@
                   <option value="python">Python</option>
                   <option value="ruby">Ruby</option>
                   <option value="rust">Rust</option>
+                  <option value="c">C</option>
+                  <option value="cplus">C++</option>
                 </b-select>
               </b-field>
 
@@ -150,6 +152,32 @@
                     <option value="1.55.0">1.55.0</option>
                     <option value="1.56.0">1.56.0</option>
                     <option value="1.57.0">1.57.0</option>
+                  </b-select>
+                </b-field>
+              </template>
+
+              <!-- If C Selected -->
+              <template v-if="form.lang == 'c'">
+                <b-field>
+                  <b-select
+                    v-model="form.version"
+                    placeholder="Select Version"
+                    disabled="disabled"
+                  >
+                    <option value="9.4.0">GCC 9.4.0</option>
+                  </b-select>
+                </b-field>
+              </template>
+
+              <!-- If C++ Selected -->
+              <template v-if="form.lang == 'cplus'">
+                <b-field>
+                  <b-select
+                    v-model="form.version"
+                    placeholder="Select Version"
+                    disabled="disabled"
+                  >
+                    <option value="9.4.0">GCC 9.4.0</option>
                   </b-select>
                 </b-field>
               </template>
@@ -365,6 +393,14 @@ export default {
 
             if (this.form.lang == "rust") {
               this.cmOption.mode = "text/x-rustsrc";
+            }
+
+            if (this.form.lang == "c") {
+              this.cmOption.mode = "text/x-java";
+            }
+
+            if (this.form.lang == "cplus") {
+              this.cmOption.mode = "text/x-java";
             }
 
             this.$store

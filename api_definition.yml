@@ -7,7 +7,7 @@ info:
   license:
     name: Apache License 2.0
     url: https://github.com/Clivern/Cattle/blob/main/LICENSE
-  version: 0.2.0
+  version: 1.0.0
 externalDocs:
   description: Find out more about cattle
   url: https://github.com/Clivern/Cattle
@@ -241,7 +241,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Task'
+                $ref: '#/components/schemas/FinalTask'
         '400':
           description: Invalid Request
           content: {}
@@ -266,8 +266,27 @@ components:
         id:
           type: integer
           format: int64
-        result:
+        status:
           type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    FinalTask:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        result:
+          type: object
+          properties:
+            output:
+              type: string
+            build_time:
+              type: string
+            execution_time:
+              type: string
         status:
           type: string
         createdAt:

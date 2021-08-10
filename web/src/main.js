@@ -18,10 +18,7 @@ Vue.use(Vuex);
 Vue.use(Buefy, { defaultIconPack: "fas" });
 
 Vue.use(
-  VueCodemirror /* {
-  options: { theme: 'base16-dark', ... },
-  events: ['scroll', ...]
-} */
+  VueCodemirror
 );
 
 Vue.config.productionTip = false;
