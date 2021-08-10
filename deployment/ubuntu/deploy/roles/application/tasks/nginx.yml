@@ -1,0 +1,51 @@
+# Copyright 2021 Clivern
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+- name: Install nginx
+  apt:
+    name=nginx
+    state=present
+  tags: [ nginx ]
+
+- name: Create the nginx configuration file
+  template:
+    src: cookie.sh.j2
+    dest: /etc/nginx/sites-available/cookie.sh
+    backup: yes
+    mode: '0644'
+  notify: reload nginx
+  tags: [ nginx ]
+
+- name: Ensure that the default site is disabled
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: reload nginx
+  tags: [ nginx ]
+
+- name: Ensure that the application site is enabled
+  file:
+    src: /etc/nginx/sites-available/cookie.sh
+    dest: /etc/nginx/sites-enabled/cookie.sh
+    state: link
+  notify: reload nginx
+  tags: [ nginx ]
+
+- name: Ensure nginx service is started
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  tags: [ nginx ]

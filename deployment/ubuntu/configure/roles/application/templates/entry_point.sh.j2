@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd /opt/app/releases/{{ app_version }}
+
+/usr/bin/python3 -m venv venv
+
+source venv/bin/activate
+
+pip install wheel
+
+pip install -r requirements.txt
+
+deactivate

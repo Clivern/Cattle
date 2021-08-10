@@ -1,0 +1,40 @@
+# Copyright 2021 Clivern
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+logrotate_scripts:
+  - name: nginx
+    log_dir: '/var/log/nginx'
+    log_extension: 'log'
+    options:
+      - rotate 7
+      - daily
+      - size 10M
+      - missingok
+      - compress
+      - create 0644 root www-data
+    scripts:
+        postrotate: "/bin/kill -USR1 `cat /run/nginx.pid 2>/dev/null` 2>/dev/null || true"
+  - name: cookie
+    log_dir: '/opt/app/shared/logs'
+    log_extension: 'log'
+    options:
+      - rotate 7
+      - daily
+      - size 10M
+      - missingok
+      - compress
+      - create 0644 clivern www-data
+    scripts:
+        postrotate: "systemctl restart cookie.service > /dev/null 2>&1 || true"

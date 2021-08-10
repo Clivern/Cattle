@@ -1,0 +1,137 @@
+# Copyright 2021 Clivern
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+- name: Remove latest release
+  file:
+    path: /opt/app/releases/{{ app_version }}
+    state: absent
+  tags: [ deploy ]
+
+- name: Clone project code
+  git:
+    repo: "{{ git_repo }}"
+    dest: /opt/app/releases/{{ app_version }}
+    version: "{{ app_version }}"
+  tags: [ deploy ]
+
+- name: Create entry point
+  template:
+    src: entry_point.sh.j2
+    dest: /opt/app/releases/{{ app_version }}/entry_point.sh
+    mode: '0755'
+  tags: [ deploy ]
+
+- name: Create migrate script
+  template:
+    src: migrate.sh.j2
+    dest: /opt/app/releases/{{ app_version }}/migrate.sh
+    mode: '0755'
+  tags: [ deploy ]
+
+- name: Create .env config file
+  template:
+    src: env.j2
+    dest: /opt/app/releases/{{ app_version }}/.env
+    mode: '0755'
+  tags: [ deploy ]
+
+- name: Create newrelic.ini config file
+  template:
+    src: newrelic.j2
+    dest: /opt/app/releases/{{ app_version }}/newrelic.ini
+    mode: '0755'
+  tags: [ deploy ]
+
+- name: Setup latest release virtualenv
+  shell: /opt/app/releases/{{ app_version }}/entry_point.sh >> /opt/app/releases/{{ app_version }}/deploy.txt
+  args:
+    creates: /opt/app/releases/{{ app_version }}/deploy.txt
+    executable: /bin/bash
+  tags: [ deploy ]
+
+- name: Update current release symlink
+  file:
+    src: /opt/app/releases/{{ app_version }}
+    dest: /opt/app/current
+    state: link
+  notify: restart nginx
+  tags: [ deploy ]
+
+- name: Remove current release logs
+  file:
+    path: /opt/app/releases/{{ app_version }}/storage/logs
+    state: absent
+  tags: [ deploy ]
+
+- name: Update logs symlink
+  file:
+    src: /opt/app/shared/logs
+    dest: /opt/app/releases/{{ app_version }}/storage/logs
+    state: link
+  tags: [ deploy ]
+
+- name: Update release owner and permissions
+  file:
+    dest: /opt/app/releases/{{ app_version }}
+    owner: "{{ app_user }}"
+    group: "www-data"
+    mode: "0755"
+    recurse: yes
+  tags: [ deploy ]
+
+- name: Update current release owner and permissions
+  file:
+    dest: /opt/app/current
+    owner: "{{ app_user }}"
+    group: "www-data"
+    mode: "0755"
+  tags: [ deploy ]
+
+- name: Update logs owner and permissions
+  file:
+    dest: /opt/app/shared/logs
+    owner: "{{ app_user }}"
+    group: "www-data"
+    mode: "0755"
+    recurse: yes
+  tags: [ deploy ]
+
+- name: Migrate database
+  shell: /opt/app/releases/{{ app_version }}/migrate.sh >> /opt/app/releases/{{ app_version }}/migrate.txt
+  args:
+    creates: /opt/app/releases/{{ app_version }}/migrate.txt
+    executable: /bin/bash
+  tags: [ deploy ]
+
+- name: Create cookie service file
+  template:
+    src: cookie.service.j2
+    dest: /etc/systemd/system/cookie.service
+    mode: "0750"
+  notify: reload cookie service
+  tags: [ deploy ]
+
+- name: Enable and start cookie service
+  systemd:
+    name: cookie
+    state: started
+    enabled: yes
+  tags: [ deploy ]
+
+- name: restart cookie service
+  systemd:
+    state: restarted
+    name: cookie
+  tags: [ deploy ]

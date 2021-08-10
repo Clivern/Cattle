@@ -1,26 +1,19 @@
 <!-- @format -->
 
 <template>
-	<div>
-		<router-view />
-	</div>
+  <div>
+    <router-view />
+  </div>
 </template>
 
-<style>
-
-</style>
+<style></style>
 
 <script>
 export default {
-	data() {
-		return {
-		};
-	},
-	methods: {
-
-	},
-	mounted() {
-
-	},
+  data() {
+    return {};
+  },
+  methods: {},
+  mounted() {},
 };
 </script>

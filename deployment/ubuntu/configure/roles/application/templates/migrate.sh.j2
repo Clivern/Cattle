@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd /opt/app/releases/{{ app_version }}
+
+source venv/bin/activate
+
+/usr/bin/python3 manage.py migrate
+
+deactivate

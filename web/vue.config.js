@@ -1,5 +1,5 @@
 /** @format */
 
 module.exports = {
-	publicPath: "/static",
+  publicPath: "/static",
 };

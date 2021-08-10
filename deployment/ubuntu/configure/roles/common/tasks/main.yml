@@ -1,0 +1,97 @@
+# Copyright 2021 Clivern
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+- name: Update Packages
+  apt:
+    update_cache: yes
+  when: update_pkgs | bool
+  tags: [ common ]
+
+- name: Upgrade Packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 # One day
+  when: upgrade_pkgs | bool
+  tags: [ common ]
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+  when: upgrade_pkgs | bool
+  tags: [ common ]
+
+- name: Install Basic Package
+  apt:
+    pkg: ufw
+    state: present
+    update_cache: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags: [ common ]
+
+- name: Install Unzip Package
+  apt:
+    pkg: unzip
+    state: present
+    update_cache: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags: [ common ]
+
+- name: SSH - Disallow Password Authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  notify: restart sshd
+  tags: [ common ]
+
+- name: Activate Firewall
+  ufw:
+    state: enabled
+    policy: deny
+  when: enable_fw
+  tags: [ common ]
+
+- name: Firewall Allow SSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+  when: enable_fw
+  tags: [ common ]
+
+- name: Firewall Allow HTTP
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+  when: enable_fw
+  tags: [ common ]
+
+- name: Firewall Allow HTTPs
+  ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+  when: enable_fw
+  tags: [ common ]
+
+- name: "Set Motd Banner"
+  template:
+    src: "motd.j2"
+    dest: "/etc/motd"
+    mode: 0700
+  tags: [ common ]
