@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "digitalocean_vpc" "cookie_infra" {
+resource "digitalocean_vpc" "bulldog_infra" {
 
-    name = "cookie-infra-vpc"
+    name = "bulldog-infra-vpc"
 
     region = var.region
 }

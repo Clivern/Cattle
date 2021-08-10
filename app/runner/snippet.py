@@ -17,6 +17,7 @@ import json
 
 from pindo.runner import Runner
 
+from app.shortcuts import Logger
 from app.util.file_system import FileSystem
 
 
@@ -24,11 +25,12 @@ class Snippet():
     """Snippet Class"""
 
     def __init__(self, id, content, language, version):
-        self._fs = FileSystem()
         self._id = id
         self._content = content
         self._language = language
         self._version = version
+        self._fs = FileSystem()
+        self.logger = Logger().get_logger(__name__)
 
     def run(self):
         """
@@ -37,6 +39,14 @@ class Snippet():
         Returns:
             The result as dict
         """
+        self.logger.info("Run the {} code version {} with uuid {}".format(
+            self._language,
+            self._version,
+            self._id
+        ))
+
+        self.logger.debug("Code has a content {}".format(self._content))
+
         if self._language == "go":
             code = Runner.go(self._content, self._version, self._id)
 
@@ -45,6 +55,8 @@ class Snippet():
                 main_class = re.search("public class(.*?){", self._content).group(1).strip()
                 code = Runner.java(self._content, self._version, self._id, {"main_class": main_class})
             except Exception:
+                self.logger.error("Invalid Java Code: Main class in missing")
+                self.logger.debug("Code has a content {}".format(self._content))
                 raise Exception("Invalid Java Code: Main class in missing")
 
         elif self._language == "php":
@@ -60,6 +72,7 @@ class Snippet():
             code = Runner.rust(self._content, self._version, self._id)
 
         else:
+            self.logger.error("Invalid programming language {}".format(self._language))
             raise Exception("Invalid programming language {}".format(self._language))
 
         engine = Runner.docker(self._fs.storage_path("mount"), code)

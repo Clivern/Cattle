@@ -51,9 +51,18 @@
     state: directory
   tags: [ pre-deploy ]
 
-- name: Ensure shared directory exists
+- name: Ensure shared logs directory exists
   file:
     path: /srv/app/shared/logs
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: '0755'
+    state: directory
+  tags: [ pre-deploy ]
+
+- name: Ensure shared mount directory exists
+  file:
+    path: /srv/app/shared/mount
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
     mode: '0755'

@@ -14,6 +14,7 @@
 
 from django.shortcuts import redirect, reverse
 from django.utils.translation import gettext as _
+from app.shortcuts import record_metric
 
 from app.exceptions.access_forbidden import AccessForbidden
 
@@ -48,3 +49,12 @@ def prevent_if_not_authenticated(function):
             raise AccessForbidden(_("Oops! Access forbidden."))
         return function(controller, request, *args, **kwargs)
     return wrap
+
+
+def push_metric(metric, count):
+    def wrapper(function):
+        def wrap(controller, request, *args, **kwargs):
+            record_metric(metric, count)
+            return function(controller, request, *args, **kwargs)
+        return wrap
+    return wrapper

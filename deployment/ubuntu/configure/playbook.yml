@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ---
-- hosts: cookie_server
+- hosts: bulldog_server
 
   vars_files:
     - ./vars/default.yml
@@ -56,17 +56,17 @@
 
     - name: "app_db_name"
       prompt: "Application MySQL Database Name"
-      default: "cookie"
+      default: "bulldog"
       private: no
 
     - name: "app_db_username"
       prompt: "Application MySQL Database Username"
-      default: "ck_admin"
+      default: "admin"
       private: no
 
     - name: "app_db_password"
       prompt: "Application MySQL Database Password"
-      default: "ck_secret"
+      default: "secret"
       private: no
 
     - name: "allow_access_from"
@@ -76,12 +76,12 @@
 
     - name: "app_user"
       prompt: "Application User"
-      default: "ckmgt"
+      default: "appmgt"
       private: no
 
     - name: "app_group"
       prompt: "Application Group"
-      default: "ckmgt"
+      default: "appmgt"
       private: no
 
     - name: "app_version"
@@ -91,7 +91,7 @@
 
     - name: "newrelic_license_key"
       prompt: "Newrelic License Key"
-      default: "xxx"
+      default: "xxxx-xxxx-xxxx-xxxx"
       private: no
 
   roles:

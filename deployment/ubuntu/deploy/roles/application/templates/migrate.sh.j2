@@ -4,6 +4,8 @@ cd /srv/app/releases/{{ app_version }}
 
 source venv/bin/activate
 
+python manage.py wait_for_db
+
 python manage.py migrate
 
 deactivate

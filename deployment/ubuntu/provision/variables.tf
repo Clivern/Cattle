@@ -31,7 +31,7 @@ variable "region" {
 
 variable "name" {
     type = string
-    default = "cookie.sh"
+    default = "bulldog.sh"
     description = "Server Name"
 }
 
