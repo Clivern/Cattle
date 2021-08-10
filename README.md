@@ -2,6 +2,11 @@
     <img alt="Cookie Logo" src="/assets/img/logo.png" height="200" />
     <h3 align="center">Cookie</h3>
     <p align="center">A Platform to Run and Share Code.</p>
+    <p align="center">
+        <a href="https://github.com/Clivern/Cookie/actions/workflows/ci.yml">
+            <img src="https://github.com/Clivern/Cookie/actions/workflows/ci.yml/badge.svg"/>
+        </a>
+    </p>
 </p>
 
 
