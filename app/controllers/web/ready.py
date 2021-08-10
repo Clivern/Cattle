@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from http import HTTPStatus
+
 from django.views import View
 from django.http import JsonResponse
 
+from app.module.readiness import Readiness
 from app.controllers.controller import Controller
 
 
@@ -22,6 +25,21 @@ class Ready(View, Controller):
     """Ready Page Controller"""
 
     def get(self, request):
+        readiness = Readiness()
+
+        if not readiness.check_db_connection():
+            return JsonResponse({
+                "status": "down",
+                "errorMessage": "Error while connecting to the database"
+            }, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+
+        # Check workers speed
+        if not readiness.check_workers(30):
+            return JsonResponse({
+                "status": "down",
+                "errorMessage": "Workers are damn slow"
+            }, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+
         return JsonResponse({
-            "status": "OK"
+            "status": "up"
         })

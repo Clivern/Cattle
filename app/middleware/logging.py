@@ -56,11 +56,12 @@ class Logging():
 
         resp_time = (time.time() - start_time) * 1000
 
-        route = "/".join([x.title() for x in request.resolver_match.url_name.split(".")])
+        if request.resolver_match and request.resolver_match.url_name:
+            route = "/".join([x.title() for x in request.resolver_match.url_name.split(".")])
+            record_metric("HTTPRequestCount/Route/{}".format(route), 1)
 
         # Send Metrics to NR
         record_metric("HTTPRequestCount", 1)
-        record_metric("HTTPRequestCount/Route/{}".format(route), 1)
         record_metric("LatencyMillisec", resp_time)
 
         if isinstance(response, JsonResponse):

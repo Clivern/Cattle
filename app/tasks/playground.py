@@ -34,8 +34,8 @@ def run(task_id):
     Args:
         task_id: The Async Task ID
     """
-    logger = Logger().get_logger(__name__)
     start_time = time.time()
+    logger = Logger().get_logger(__name__)
 
     logger.info("Run task with id {} in background".format(task_id))
 
@@ -69,7 +69,11 @@ def run(task_id):
         result = snippet.run()
         logger.info("Task with uuid {} succeeded".format(task.uuid))
     except Exception as e:
-        result = None
+        result = {
+            "output": "Failed to run the code",
+            "build_time": None,
+            "execution_time": None,
+        }
         status = TaskRepository.FAILED
         logger.error("Task with uuid {} failed: {}".format(task.uuid, str(e)))
 

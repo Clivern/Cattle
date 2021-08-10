@@ -112,14 +112,25 @@ class CodeAction(View, Controller):
         Returns:
             The JSON Response
         """
-        self.logger.info("Attempt to get code resource with uuid {}".format(id))
-        code = self.code_repository.get_one_by_uuid(id)
+
+        # Workaround to allow fetching code item by slug for web ui
+        if "-" in id:
+            id_type = "uuid"
+        else:
+            id_type = "slug"
+
+        self.logger.info("Attempt to get code resource with {} {}".format(id_type, id))
+
+        if id_type == "uuid":
+            code = self.code_repository.get_one_by_uuid(id)
+        else:
+            code = self.code_repository.get_one_by_slug(id)
 
         if not code:
-            self.logger.info("Code with uuid {} not found".format(id))
-            raise ResourceNotFound("Code with uuid {} not found".format(id))
+            self.logger.info("Code with {} {} not found".format(id_type, id))
+            raise ResourceNotFound("Code with {} {} not found".format(id_type, id))
 
-        self.logger.info("Found a code item with uuid {}".format(code.id))
+        self.logger.info("Found a code item with {} {}".format(id_type, code.id))
 
         return JsonResponse({
             "id": code.id,
@@ -350,11 +361,15 @@ class RunCode(View, Controller):
             "result": "{}"
         })
 
-        self.logger.info("A new task with uuid {} got created".format(task.id))
+        if not task:
+            self.logger.error("Error while creating a new task")
+            raise InternalServerError("Internal Server Error.")
+
+        self.logger.info("A new task with uuid {} got created".format(task.uuid))
 
         run.delay(task.id)
 
-        self.logger.info("A new task with uuid {} sent to workers".format(task.id))
+        self.logger.info("A new task with uuid {} sent to workers".format(task.uuid))
 
         return JsonResponse({
             "id": task.uuid,

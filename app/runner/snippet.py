@@ -14,22 +14,47 @@
 
 import re
 import json
+from multiprocessing import Process, Manager
 
 from pindo.runner import Runner
 
 from app.shortcuts import Logger
-from app.util.file_system import FileSystem
+
+
+def execute_code(engine, output):
+    """
+    Execute the code
+
+    Args:
+        engine: the engine instance
+        output: the var to store the result
+    """
+    logger = Logger().get_logger(__name__)
+
+    try:
+        engine.setup()
+        r = engine.run()
+    except Exception as e:
+        output['result'] = {
+            "output": "Failed to run the code",
+            "build_time": None,
+            "execution_time": None,
+        }
+        logger.error("Failed to run the code {}".format(str(e)))
+        return
+
+    output['result'] = r
 
 
 class Snippet():
     """Snippet Class"""
 
-    def __init__(self, id, content, language, version):
+    def __init__(self, id, content, language, version, timeout=60):
         self._id = id
         self._content = content
         self._language = language
         self._version = version
-        self._fs = FileSystem()
+        self._timeout = timeout
         self.logger = Logger().get_logger(__name__)
 
     def run(self):
@@ -75,13 +100,31 @@ class Snippet():
             self.logger.error("Invalid programming language {}".format(self._language))
             raise Exception("Invalid programming language {}".format(self._language))
 
-        engine = Runner.docker(self._fs.storage_path("mount"), code)
+        engine = Runner.docker(code)
 
-        engine.setup()
-        result = engine.run()
-        engine.cleanup()
+        manager = Manager()
+        out = manager.dict()
 
-        return result
+        p = Process(target=execute_code, args=(engine, out))
+        p.start()
+        p.join(timeout=self._timeout)
+        p.terminate()
+
+        try:
+            engine.cleanup()
+        except Exception as e:
+            self.logger.warning("Error while doing cleanup: {}".format(str(e)))
+
+        # Code is damn slow
+        if p.exitcode is None:
+            # $_timeout exceeded
+            return {
+                "output": "Maximum execution time ({} seconds) reached".format(self._timeout),
+                "build_time": None,
+                "execution_time": None,
+            }
+
+        return out['result']
 
     @classmethod
     def from_string(cls, data):
@@ -100,7 +143,8 @@ class Snippet():
             data['id'],
             data['content'],
             data['language'],
-            data['version']
+            data['version'],
+            data['timeout']
         )
 
     def __str__(self):
@@ -114,21 +158,41 @@ class Snippet():
             'id': self._id,
             'content': self._content,
             'language': self._language,
-            'version': self._version
+            'version': self._version,
+            'timeout': self._timeout,
         })
 
     @property
     def id(self):
+        """
+        Gets the ID
+        """
         return self._id
 
     @property
     def content(self):
+        """
+        Gets the Content
+        """
         return self._content
 
     @property
+    def timeout(self):
+        """
+        Gets the Timeout
+        """
+        return self._timeout
+
+    @property
     def language(self):
+        """
+        Gets the Language
+        """
         return self._language
 
     @property
     def version(self):
+        """
+        Gets the Version
+        """
         return self._version
