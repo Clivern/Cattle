@@ -17,9 +17,7 @@ Vue.use(Vuex);
 
 Vue.use(Buefy, { defaultIconPack: "fas" });
 
-Vue.use(
-  VueCodemirror
-);
+Vue.use(VueCodemirror);
 
 Vue.config.productionTip = false;
 

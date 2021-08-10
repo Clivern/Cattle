@@ -6,7 +6,7 @@ Faker==11.3.0
 django-rq==2.5.1
 jsonschema==4.4.0
 requests==2.27.1
-pindo==1.0.0
+pindo==1.1.0
 mysqlclient==2.1.0
 newrelic==7.2.4.171
 unixsig==0.1.1

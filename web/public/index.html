@@ -12,12 +12,50 @@
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
     />
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_id }}"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id={{ google_id }}"
+    ></script>
+
+    <meta
+      name="description"
+      content="A Platform to Run and Share Code. It Supports PHP, Python, Ruby, Java, Go, Rust, C and C++."
+    />
+    <meta
+      name="keywords"
+      content="code-playground, php, python, ruby, java, go, golang, rust, c, c++"
+    />
+    <link rel="canonical" href="https://www.cattle.sh/" />
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Cattle" />
+    <meta property="og:type" content="application" />
+    <meta property="og:title" content="Cattle" />
+    <meta
+      property="og:description"
+      content="A Platform to Run and Share Code. It Supports PHP, Python, Ruby, Java, Go, Rust, C and C++."
+    />
+    <meta property="og:url" content="https://www.cattle.sh/" />
+    <meta property="og:image" content="<%= BASE_URL %>logo.png" />
+    <meta property="og:image:secure_url" content="<%= BASE_URL %>logo.png" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@clivernco" />
+    <meta name="twitter:title" content="Cattle" />
+    <meta
+      name="twitter:description"
+      content="A Platform to Run and Share Code. It Supports PHP, Python, Ruby, Java, Go, Rust, C and C++."
+    />
+    <meta name="twitter:creator" content="@clivernco" />
+    <meta name="twitter:image" content="<%= BASE_URL %>logo.png" />
+
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '{{ google_id }}');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "{{ google_id }}");
     </script>
   </head>
   <body>

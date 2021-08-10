@@ -92,6 +92,7 @@
                     <option value="3.7">3.7</option>
                     <option value="3.8">3.8</option>
                     <option value="3.9">3.9</option>
+                    <option value="3.10">3.10</option>
                   </b-select>
                 </b-field>
               </template>
@@ -128,6 +129,8 @@
                     <option value="1.55.0">1.55.0</option>
                     <option value="1.56.0">1.56.0</option>
                     <option value="1.57.0">1.57.0</option>
+                    <option value="1.58.0">1.58.0</option>
+                    <option value="1.58.1">1.58.1</option>
                   </b-select>
                 </b-field>
               </template>
