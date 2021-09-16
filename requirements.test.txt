@@ -1,0 +1,6 @@
+pycodestyle==2.7.0
+coverage==5.5
+flake8==3.9.2
+flake8-comprehensions==3.5.0
+flake8-eradicate==1.0.0
+flake8-todo==0.7
