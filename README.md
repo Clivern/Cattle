@@ -1,7 +1,7 @@
 <p align="center">
-    <img alt="Cookie Logo" src="/assets/img/logo.png" height="120" />
+    <img alt="Cookie Logo" src="/assets/img/logo.png" height="200" />
     <h3 align="center">Cookie</h3>
-    <p align="center">Platform to Learn, Run and Share Code.</p>
+    <p align="center">A Platform to Run and Share Code.</p>
 </p>
 
 
