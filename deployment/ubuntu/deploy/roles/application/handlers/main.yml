@@ -29,3 +29,9 @@
     state: restarted
     daemon_reload: yes
     name: cookie
+
+- name: reload ckworker service
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: ckworker

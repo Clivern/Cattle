@@ -130,8 +130,37 @@
     enabled: yes
   tags: [ deploy ]
 
+- name: Pause for 10 seconds
+  pause:
+    seconds: 10
+
 - name: restart cookie service
   systemd:
     state: restarted
     name: cookie
+  tags: [ deploy ]
+
+- name: Create cookie worker service file
+  template:
+    src: ckworker.service.j2
+    dest: /etc/systemd/system/ckworker.service
+    mode: "0750"
+  notify: reload ckworker service
+  tags: [ deploy ]
+
+- name: Enable and start cookie worker service
+  systemd:
+    name: ckworker
+    state: started
+    enabled: yes
+  tags: [ deploy ]
+
+- name: Pause for 10 seconds
+  pause:
+    seconds: 10
+
+- name: restart cookie worker service
+  systemd:
+    state: restarted
+    name: ckworker
   tags: [ deploy ]

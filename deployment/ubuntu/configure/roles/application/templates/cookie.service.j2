@@ -6,7 +6,6 @@ After=network.target
 User={{ app_user }}
 Group=www-data
 WorkingDirectory=/srv/app/current
-Environment="PATH=/srv/app/current/venv/bin"
 ExecStart=/srv/app/current/venv/bin/gunicorn --workers 3 --bind unix:venv.sock app.wsgi
 
 [Install]

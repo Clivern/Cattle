@@ -56,10 +56,11 @@ def run(task_id):
         result = snippet.run()
         logger.info("Task with uuid {} succeeded".format(task.uuid))
     except Exception as e:
+        result = None
         status = TaskRepository.FAILED
         logger.error("Task with uuid {} failed: {}".format(task.uuid, str(e)))
 
     task_repository.update_one_by_id(task.id, {
-        "result": json.dumps(result) if result else "{}",
+        "result": json.dumps(result) if result not None else "{}",
         "status": status
     })
