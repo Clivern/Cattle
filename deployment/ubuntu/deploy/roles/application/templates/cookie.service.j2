@@ -5,9 +5,9 @@ After=network.target
 [Service]
 User={{ app_user }}
 Group=www-data
-WorkingDirectory=/opt/app/current
-Environment="PATH=/opt/app/current/venv/bin"
-ExecStart=/opt/app/current/venv/bin/gunicorn --workers 3 --bind unix:venv.sock app.wsgi
+WorkingDirectory=/srv/app/current
+Environment="PATH=/srv/app/current/venv/bin"
+ExecStart=/srv/app/current/venv/bin/gunicorn --workers 3 --bind unix:venv.sock app.wsgi
 
 [Install]
 WantedBy=multi-user.target

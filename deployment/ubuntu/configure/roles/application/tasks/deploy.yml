@@ -15,76 +15,76 @@
 ---
 - name: Remove latest release
   file:
-    path: /opt/app/releases/{{ app_version }}
+    path: /srv/app/releases/{{ app_version }}
     state: absent
   tags: [ deploy ]
 
 - name: Clone project code
   git:
     repo: "{{ git_repo }}"
-    dest: /opt/app/releases/{{ app_version }}
+    dest: /srv/app/releases/{{ app_version }}
     version: "{{ app_version }}"
   tags: [ deploy ]
 
 - name: Create entry point
   template:
     src: entry_point.sh.j2
-    dest: /opt/app/releases/{{ app_version }}/entry_point.sh
+    dest: /srv/app/releases/{{ app_version }}/entry_point.sh
     mode: '0755'
   tags: [ deploy ]
 
 - name: Create migrate script
   template:
     src: migrate.sh.j2
-    dest: /opt/app/releases/{{ app_version }}/migrate.sh
+    dest: /srv/app/releases/{{ app_version }}/migrate.sh
     mode: '0755'
   tags: [ deploy ]
 
 - name: Create .env config file
   template:
     src: env.j2
-    dest: /opt/app/releases/{{ app_version }}/.env
+    dest: /srv/app/releases/{{ app_version }}/.env
     mode: '0755'
   tags: [ deploy ]
 
 - name: Create newrelic.ini config file
   template:
     src: newrelic.j2
-    dest: /opt/app/releases/{{ app_version }}/newrelic.ini
+    dest: /srv/app/releases/{{ app_version }}/newrelic.ini
     mode: '0755'
   tags: [ deploy ]
 
 - name: Setup latest release virtualenv
-  shell: /opt/app/releases/{{ app_version }}/entry_point.sh >> /opt/app/releases/{{ app_version }}/deploy.txt
+  shell: /srv/app/releases/{{ app_version }}/entry_point.sh >> /srv/app/releases/{{ app_version }}/deploy.txt
   args:
-    creates: /opt/app/releases/{{ app_version }}/deploy.txt
+    creates: /srv/app/releases/{{ app_version }}/deploy.txt
     executable: /bin/bash
   tags: [ deploy ]
 
 - name: Update current release symlink
   file:
-    src: /opt/app/releases/{{ app_version }}
-    dest: /opt/app/current
+    src: /srv/app/releases/{{ app_version }}
+    dest: /srv/app/current
     state: link
   notify: restart nginx
   tags: [ deploy ]
 
 - name: Remove current release logs
   file:
-    path: /opt/app/releases/{{ app_version }}/storage/logs
+    path: /srv/app/releases/{{ app_version }}/storage/logs
     state: absent
   tags: [ deploy ]
 
 - name: Update logs symlink
   file:
-    src: /opt/app/shared/logs
-    dest: /opt/app/releases/{{ app_version }}/storage/logs
+    src: /srv/app/shared/logs
+    dest: /srv/app/releases/{{ app_version }}/storage/logs
     state: link
   tags: [ deploy ]
 
 - name: Update release owner and permissions
   file:
-    dest: /opt/app/releases/{{ app_version }}
+    dest: /srv/app/releases/{{ app_version }}
     owner: "{{ app_user }}"
     group: "www-data"
     mode: "0755"
@@ -93,7 +93,7 @@
 
 - name: Update current release owner and permissions
   file:
-    dest: /opt/app/current
+    dest: /srv/app/current
     owner: "{{ app_user }}"
     group: "www-data"
     mode: "0755"
@@ -101,7 +101,7 @@
 
 - name: Update logs owner and permissions
   file:
-    dest: /opt/app/shared/logs
+    dest: /srv/app/shared/logs
     owner: "{{ app_user }}"
     group: "www-data"
     mode: "0755"
@@ -109,9 +109,9 @@
   tags: [ deploy ]
 
 - name: Migrate database
-  shell: /opt/app/releases/{{ app_version }}/migrate.sh >> /opt/app/releases/{{ app_version }}/migrate.txt
+  shell: /srv/app/releases/{{ app_version }}/migrate.sh >> /srv/app/releases/{{ app_version }}/migrate.txt
   args:
-    creates: /opt/app/releases/{{ app_version }}/migrate.txt
+    creates: /srv/app/releases/{{ app_version }}/migrate.txt
     executable: /bin/bash
   tags: [ deploy ]
 

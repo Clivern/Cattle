@@ -44,7 +44,7 @@
 
 - name: Ensure releases directory exists
   file:
-    path: /opt/app/releases
+    path: /srv/app/releases
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
     mode: '0755'
@@ -53,7 +53,7 @@
 
 - name: Ensure shared directory exists
   file:
-    path: /opt/app/shared/logs
+    path: /srv/app/shared/logs
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
     mode: '0755'

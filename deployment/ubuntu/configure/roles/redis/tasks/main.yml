@@ -35,3 +35,13 @@
     backup: yes
   notify: restart redis
   tags: [ redis ]
+
+- name: Run Redis from Systemd
+  lineinfile:
+    dest: /etc/redis/redis.conf
+    regexp: "^supervised no"
+    line: "supervised systemd"
+    state: present
+    backup: yes
+  notify: restart redis
+  tags: [ redis ]

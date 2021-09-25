@@ -27,7 +27,7 @@ logrotate_scripts:
     scripts:
         postrotate: "/bin/kill -USR1 `cat /run/nginx.pid 2>/dev/null` 2>/dev/null || true"
   - name: cookie
-    log_dir: '/opt/app/shared/logs'
+    log_dir: '/srv/app/shared/logs'
     log_extension: 'log'
     options:
       - rotate 7

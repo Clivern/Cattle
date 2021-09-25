@@ -7,3 +7,4 @@ django-rq==2.5.1
 jsonschema==4.3.2
 requests==2.26.0
 pindo==0.2.4
+mysqlclient==2.1.0

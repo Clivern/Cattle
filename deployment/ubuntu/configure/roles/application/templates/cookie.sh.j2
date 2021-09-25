@@ -2,11 +2,11 @@ server {
     listen      80;
     listen      [::]:80;
     server_name www.cookie.sh;
-    set         $base /opt/app/current;
+    set         $base /srv/app/current;
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/opt/app/current/venv.sock;
+        proxy_pass http://unix:/srv/app/current/venv.sock;
         uwsgi_param Host              $host;
         uwsgi_param X-Real-IP         $remote_addr;
         uwsgi_param X-Forwarded-For   $proxy_add_x_forwarded_for;
