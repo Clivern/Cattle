@@ -35,6 +35,6 @@ logrotate_scripts:
       - size 10M
       - missingok
       - compress
-      - create 0644 clivern www-data
+      - create 0644 root www-data
     scripts:
         postrotate: "systemctl restart cookie.service > /dev/null 2>&1 || true"
