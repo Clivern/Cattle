@@ -142,15 +142,15 @@
 
 - name: Create cookie worker service file
   template:
-    src: ckworker.service.j2
-    dest: /etc/systemd/system/ckworker.service
+    src: worker.service.j2
+    dest: /etc/systemd/system/worker.service
     mode: "0750"
-  notify: reload ckworker service
+  notify: reload worker service
   tags: [ deploy ]
 
 - name: Enable and start cookie worker service
   systemd:
-    name: ckworker
+    name: worker
     state: started
     enabled: yes
   tags: [ deploy ]
@@ -162,5 +162,5 @@
 - name: restart cookie worker service
   systemd:
     state: restarted
-    name: ckworker
+    name: worker
   tags: [ deploy ]

@@ -1,12 +1,15 @@
 [Unit]
 Description=Gunicorn Instance to Run Cookie Worker
 After=network.target
+StartLimitIntervalSec=500
+StartLimitBurst=5
 
 [Service]
-# To access docker
 User=root
 Group=www-data
 WorkingDirectory=/srv/app/current
+Restart=on-failure
+RestartSec=5s
 ExecStart=/srv/app/current/venv/bin/python manage.py rqworker default
 
 [Install]

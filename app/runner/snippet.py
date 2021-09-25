@@ -42,7 +42,7 @@ class Snippet():
 
         elif self._language == "java":
             try:
-                main_class = re.search("public class(.*?){", code).group(1).strip()
+                main_class = re.search("public class(.*?){", self._content).group(1).strip()
                 code = Runner.java(self._content, self._version, self._id, {"main_class": main_class})
             except Exception:
                 raise Exception("Invalid Java Code: Main class in missing")

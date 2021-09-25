@@ -1,12 +1,16 @@
 [Unit]
-Description=Gunicorn instance to serve Cookie
+Description=Gunicorn Instance to Serve Cookie
 After=network.target
+StartLimitIntervalSec=500
+StartLimitBurst=5
 
 [Service]
-User={{ app_user }}
+User=root
 Group=www-data
 WorkingDirectory=/srv/app/current
-ExecStart=/srv/app/current/venv/bin/gunicorn --workers 3 --bind unix:venv.sock app.wsgi
+Restart=on-failure
+RestartSec=5s
+ExecStart=/srv/app/current/venv/bin/gunicorn --workers 3 --bind unix:/run/cookie.sock app.wsgi
 
 [Install]
 WantedBy=multi-user.target

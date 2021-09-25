@@ -30,8 +30,8 @@
     daemon_reload: yes
     name: cookie
 
-- name: reload ckworker service
+- name: reload worker service
   systemd:
     state: restarted
     daemon_reload: yes
-    name: ckworker
+    name: worker
