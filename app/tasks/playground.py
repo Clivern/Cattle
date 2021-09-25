@@ -61,6 +61,6 @@ def run(task_id):
         logger.error("Task with uuid {} failed: {}".format(task.uuid, str(e)))
 
     task_repository.update_one_by_id(task.id, {
-        "result": json.dumps(result) if result not None else "{}",
+        "result": json.dumps(result) if result is not None else "{}",
         "status": status
     })
