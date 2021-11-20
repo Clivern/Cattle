@@ -18,6 +18,7 @@ import newrelic.agent
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
+os.environ.setdefault('NEW_RELIC_STATUS', 'disabled')
 
 application = get_wsgi_application()
 
@@ -33,12 +34,10 @@ if get_config("new_relic_config_file", "") == "":
 
     logger = Logger().get_logger(__name__)
 
-    if not os.path.isfile(file):
-        # Disable New Relic
-        os.environ["NEW_RELIC_STATUS"] = "disabled"
-        logger.warning("Newrelic is disabled: newrelic.ini is missing")
-    else:
+    if os.path.isfile(file):
         # Enable New Relic
         os.environ["NEW_RELIC_STATUS"] = "enabled"
         logger.info("Load newrelic config file {}".format(file))
         newrelic.agent.initialize(file)
+    else:
+        logger.warning("Newrelic will be disabled since newrelic.ini config is missing")
