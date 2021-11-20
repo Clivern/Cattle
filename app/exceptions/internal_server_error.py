@@ -12,15 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from http import HTTPStatus
 
-from app.exceptions.error_codes import ErrorCodes
-from app.exceptions.server_error import ServerError
-
-
-class InternalError(ServerError):
-    """Client Error Custom Exception"""
-
-    def __init__(self, message, http_status_code=HTTPStatus.INTERNAL_SERVER_ERROR, error_code=ErrorCodes.SERVER_ERROR):
-        """Inits InternalError"""
-        ServerError.__init__(self, message, http_status_code, error_code)
+class InternalServerError(Exception):
+    pass

@@ -12,15 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from http import HTTPStatus
 
-from app.exceptions.error_codes import ErrorCodes
-from app.exceptions.client_error import ClientError
-
-
-class InvalidRequest(ClientError):
-    """Client Error Custom Exception"""
-
-    def __init__(self, message, http_status_code=HTTPStatus.BAD_REQUEST, error_code=ErrorCodes.CLIENT_ERROR):
-        """Inits InvalidRequest"""
-        ClientError.__init__(self, message, http_status_code, error_code)
+class InvalidRequest(Exception):
+    pass

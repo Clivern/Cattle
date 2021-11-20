@@ -28,6 +28,8 @@ from app.controllers.controller import Controller
 from app.repository.task_repository import TaskRepository
 from app.repository.code_repository import CodeRepository
 from app.exceptions.invalid_request import InvalidRequest
+from app.exceptions.resource_not_found import ResourceNotFound
+from app.exceptions.internal_server_error import InternalServerError
 
 
 class CreateCode(View, Controller):
@@ -54,10 +56,7 @@ class CreateCode(View, Controller):
         )
 
         if not result:
-            raise InvalidRequest(
-                self.validator.get_error(),
-                HTTPStatus.BAD_REQUEST
-            )
+            raise InvalidRequest(self.validator.get_error())
 
         slug = Random.token(Random.rand_int(5, 10))
         data = json.loads(request.body.decode('utf-8'))
@@ -107,13 +106,10 @@ class CodeAction(View, Controller):
             The JSON Response
         """
         self.logger.info("Attempt to get code resource with uuid {}".format(id))
-
         code = self.code_repository.get_one_by_uuid(id)
 
         if not code:
-            return JsonResponse({
-                "errorMessage": _("Code with uuid {} not found".format(id)),
-            }, status=HTTPStatus.NOT_FOUND)
+            raise ResourceNotFound("Code with uuid {} not found".format(id))
 
         return JsonResponse({
             "id": code.id,
@@ -146,24 +142,17 @@ class CodeAction(View, Controller):
         )
 
         if not result:
-            raise InvalidRequest(
-                self.validator.get_error(),
-                HTTPStatus.BAD_REQUEST
-            )
+            raise InvalidRequest(self.validator.get_error())
 
         code = self.code_repository.get_one_by_uuid(id)
 
         if not code:
-            return JsonResponse({
-                "errorMessage": _("Code with uuid {} not found".format(id)),
-            }, status=HTTPStatus.NOT_FOUND)
+            raise ResourceNotFound("Code with uuid {} not found".format(id))
 
         data = json.loads(request.body.decode('utf-8'))
 
         if code.token != data["token"]:
-            return JsonResponse({
-                "errorMessage": _("Invalid Request: Token doesn't match"),
-            }, status=HTTPStatus.BAD_REQUEST)
+            raise InvalidRequest(_("Token doesn't match"))
 
         result = self.code_repository.update_one_by_uuid(code.uuid, {
             "language": data["language"],
@@ -172,9 +161,7 @@ class CodeAction(View, Controller):
         })
 
         if not result:
-            return JsonResponse({
-                "errorMessage": _("Internal Server Error."),
-            }, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+            raise InternalServerError(_("Internal Server Error."))
 
         return JsonResponse({
             "id": code.id,
@@ -203,12 +190,10 @@ class CodeAction(View, Controller):
 
         result = self.code_repository.delete_one_by_uuid(id)
 
-        if result:
-            return JsonResponse({}, status=HTTPStatus.NO_CONTENT)
-        else:
-            return JsonResponse({
-                "errorMessage": _("Code with uuid {} not found".format(id)),
-            }, status=HTTPStatus.NOT_FOUND)
+        if not result:
+            raise ResourceNotFound("Code with uuid {} not found".format(id))
+
+        return JsonResponse({}, status=HTTPStatus.NO_CONTENT)
 
 
 class GetTask(View, Controller):
@@ -232,18 +217,16 @@ class GetTask(View, Controller):
         self.logger.info("Fetch task with uuid {}".format(id))
         task = self.task_repository.get_one_by_uuid(id)
 
-        if task:
-            return JsonResponse({
-                "id": id,
-                "status": task.status.upper(),
-                "result": json.loads(task.result),
-                "createdAt": task.created_at,
-                "updatedAt":  task.updated_at
-            }, status=HTTPStatus.OK)
-        else:
-            return JsonResponse({
-                "errorMessage": _("Task with uuid {} not found".format(id)),
-            }, status=HTTPStatus.NOT_FOUND)
+        if not task:
+            raise ResourceNotFound("Task with uuid {} not found".format(id))
+
+        return JsonResponse({
+            "id": id,
+            "status": task.status.upper(),
+            "result": json.loads(task.result),
+            "createdAt": task.created_at,
+            "updatedAt":  task.updated_at
+        }, status=HTTPStatus.OK)
 
 
 class ExecuteCode(View, Controller):
@@ -270,10 +253,7 @@ class ExecuteCode(View, Controller):
         )
 
         if not result:
-            raise InvalidRequest(
-                self.validator.get_error(),
-                HTTPStatus.BAD_REQUEST
-            )
+            raise InvalidRequest(self.validator.get_error())
 
         data = json.loads(request.body.decode('utf-8'))
 
@@ -323,9 +303,7 @@ class RunCode(View, Controller):
         code = self.code_repository.get_one_by_uuid(id)
 
         if not code:
-            return JsonResponse({
-                "errorMessage": _("Code with uuid {} not found".format(id)),
-            }, status=HTTPStatus.NOT_FOUND)
+            raise ResourceNotFound("Code with uuid {} not found".format(id))
 
         task = self.task_repository.insert_one({
             "uuid": str(uuid.uuid4()),

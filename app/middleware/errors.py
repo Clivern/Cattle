@@ -18,10 +18,11 @@ from django.http import JsonResponse
 from django.utils.translation import gettext as _
 
 from app.shortcuts import Logger
-from app.exceptions.client_error import ClientError
-from app.exceptions.server_error import ServerError
-from app.exceptions.error_codes import ErrorCodes
 from app.shortcuts import record_metric
+from app.exceptions.access_forbidden import AccessForbidden
+from app.exceptions.invalid_request import InvalidRequest
+from app.exceptions.resource_not_found import ResourceNotFound
+from app.exceptions.internal_server_error import InternalServerError
 
 
 class Errors():
@@ -47,6 +48,7 @@ class Errors():
             request: request instance
         """
         response = self.get_response(request)
+
         return response
 
     def process_exception(self, request, exception):
@@ -59,7 +61,21 @@ class Errors():
         Returns:
             an instance of JsonResponse
         """
-        if isinstance(exception, ClientError):
+        if isinstance(exception, InternalServerError):
+            self.logger.error(
+                _("The server encountered something unexpected! {method}:{path}  - {name} - {exception}").format(
+                    method=request.method,
+                    path=request.path,
+                    name=exception.__class__.__name__,
+                    exception=exception
+                )
+            )
+            self.logger.exception(exception)
+
+            # Send Metric to NR
+            record_metric("ServerErrorsCount", 1)
+
+        else:
             # Log client errors for debugging purposes
             # client errros like unauthorized access or invalid request data
             self.logger.debug(
@@ -74,52 +90,52 @@ class Errors():
             # Send Metric to NR
             record_metric("ClientErrorsCount", 1)
 
-        else:
-            self.logger.error(
-                _("The server encountered something unexpected! {method}:{path}  - {name} - {exception}").format(
-                    method=request.method,
-                    path=request.path,
-                    name=exception.__class__.__name__,
-                    exception=exception
-                )
-            )
-            self.logger.exception(exception)
-
-            # Send Metric to NR
-            record_metric("ServerErrorsCount", 1)
-
-        if isinstance(exception, ClientError):
+        # AccessForbidden Exception
+        if isinstance(exception, AccessForbidden):
             if "Accept" in request.headers.keys() and "text/html" in request.headers['Accept']:
                 return
 
-            # Incase of client error, send json response with the error message, error code and reference
             return JsonResponse({
-                'errorCode': exception.get_error_code()["code"],
                 'errorMessage': str(exception),
-                'correlationId': request.META["X-Correlation-ID"],
-                'reference': exception.get_error_code()["reference"]
-            }, status=exception.get_http_status_code())
+                'correlationId': request.META["X-Correlation-ID"]
+            }, status=HTTPStatus.FORBIDDEN)
 
-        elif isinstance(exception, ServerError):
+        # InvalidRequest Exception
+        elif isinstance(exception, InvalidRequest):
             if "Accept" in request.headers.keys() and "text/html" in request.headers['Accept']:
                 return
 
-            # Incase of server error, send json response with a generic message, error code and reference
             return JsonResponse({
-                'errorCode': exception.get_error_code()["code"],
-                'errorMessage': _("Internal Server Error!"),
-                'correlationId': request.META["X-Correlation-ID"],
-                'reference': exception.get_error_code()["reference"]
-            }, status=exception.get_http_status_code())
+                'errorMessage': str(exception),
+                'correlationId': request.META["X-Correlation-ID"]
+            }, status=HTTPStatus.BAD_REQUEST)
 
+        # ResourceNotFound Exception
+        elif isinstance(exception, ResourceNotFound):
+            if "Accept" in request.headers.keys() and "text/html" in request.headers['Accept']:
+                return
+
+            return JsonResponse({
+                'errorMessage': str(exception),
+                'correlationId': request.META["X-Correlation-ID"]
+            }, status=HTTPStatus.NOT_FOUND)
+
+        # InternalServerError Exception
+        elif isinstance(exception, InternalServerError):
+            if "Accept" in request.headers.keys() and "text/html" in request.headers['Accept']:
+                return
+
+            return JsonResponse({
+                'errorMessage': _("Internal Server Error!"),
+                'correlationId': request.META["X-Correlation-ID"]
+            }, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+
+        # Unknown Exception
         else:
             if "Accept" in request.headers.keys() and "text/html" in request.headers['Accept']:
                 return
 
-            # Incase of other unexpected errors, send json response with a generic message, default error code and reference
             return JsonResponse({
-                'errorCode': ErrorCodes.SERVER_ERROR["code"],
-                'errorMessage': _("Something goes wrong! Please contact a system administrator."),
-                'correlationId': request.META["X-Correlation-ID"],
-                'reference': ErrorCodes.SERVER_ERROR["reference"]
+                'errorMessage': _("Something goes wrong! Please contact system administrator."),
+                'correlationId': request.META["X-Correlation-ID"]
             }, status=HTTPStatus.INTERNAL_SERVER_ERROR)
