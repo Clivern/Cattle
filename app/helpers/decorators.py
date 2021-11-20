@@ -14,8 +14,8 @@
 
 from django.shortcuts import redirect, reverse
 from django.utils.translation import gettext as _
-from app.shortcuts import record_metric
 
+from app.shortcuts import record_metric
 from app.exceptions.access_forbidden import AccessForbidden
 
 

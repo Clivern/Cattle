@@ -15,6 +15,7 @@
 import json
 
 from django_rq import job
+
 from app.shortcuts import Logger
 from app.runner.snippet import Snippet
 from app.repository.task_repository import TaskRepository
@@ -23,6 +24,12 @@ from app.repository.code_repository import CodeRepository
 
 @job
 def run(task_id):
+    """
+    Run Code in Background
+
+    Args:
+        task_id: The Async Task ID
+    """
     logger = Logger().get_logger(__name__)
     logger.info("Run task with id {} in background".format(task_id))
 

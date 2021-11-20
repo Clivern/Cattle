@@ -13,10 +13,14 @@
 # limitations under the License.
 
 from django_rq import job
+
 from app.shortcuts import Logger
 
 
 @job
 def ping():
+    """
+    Ping Check
+    """
     logger = Logger().get_logger(__name__)
     logger.info("pong")
