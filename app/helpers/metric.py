@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import newrelic.agent
 
 from app.shortcuts import Logger
@@ -19,7 +20,21 @@ from app.shortcuts import get_config
 
 
 def record_metric(metric, count):
-    metric = "{}/{}".format(get_config("app_name", "Bulldog"), metric)
+    """
+    Report a Custom Metric to New Relic
+
+    Args:
+        metric: the metric name
+        count: The value
+    """
     logger = Logger().get_logger(__name__)
+
+    # Skip Reporting
+    if os.environ["NEW_RELIC_STATUS"] == "disabled":
+        logger.warning("Skip metric {} reporting: newrelic.ini is missing".format(metric))
+        return
+
+    # Report the metric
+    metric = "{}/{}".format(get_config("app_name", "Bulldog"), metric)
     logger.info("Push metric with key {} and value {}".format(metric, str(count)))
     newrelic.agent.record_custom_metric(metric, count)

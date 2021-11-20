@@ -27,13 +27,13 @@
 # You must specify the license key associated with your New
 # Relic account. This key binds the Python Agent's data to your
 # account in the New Relic service.
-license_key = xxxx-xxxx-xxxx-xxxx
+license_key = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # The application name. Set this to be the name of your
 # application as you would like it to show up in New Relic UI.
 # The UI will then auto-map instances of your application into a
 # entry on your home dashboard page.
-app_name = Bulldog
+app_name = bulldog
 
 # New Relic offers distributed tracing for monitoring and analyzing modern
 # distributed systems.Enable distributed tracing.
@@ -201,7 +201,7 @@ monitor_mode = false
 monitor_mode = false
 
 [newrelic:staging]
-app_name = Bulldog (Staging)
+app_name = bulldog (Staging)
 monitor_mode = true
 
 [newrelic:production]

@@ -21,6 +21,7 @@ from app.shortcuts import Logger
 from app.exceptions.client_error import ClientError
 from app.exceptions.server_error import ServerError
 from app.exceptions.error_codes import ErrorCodes
+from app.shortcuts import record_metric
 
 
 class Errors():
@@ -69,6 +70,10 @@ class Errors():
                     exception=exception
                 )
             )
+
+            # Send Metric to NR
+            record_metric("ClientErrorsCount", 1)
+
         else:
             self.logger.error(
                 _("The server encountered something unexpected! {method}:{path}  - {name} - {exception}").format(
@@ -79,6 +84,9 @@ class Errors():
                 )
             )
             self.logger.exception(exception)
+
+            # Send Metric to NR
+            record_metric("ServerErrorsCount", 1)
 
         if isinstance(exception, ClientError):
             if "Accept" in request.headers.keys() and "text/html" in request.headers['Accept']:

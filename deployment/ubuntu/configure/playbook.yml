@@ -91,7 +91,7 @@
 
     - name: "newrelic_license_key"
       prompt: "Newrelic License Key"
-      default: "xxxx-xxxx-xxxx-xxxx"
+      default: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       private: no
 
     - name: "workers_counts"

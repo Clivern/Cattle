@@ -32,5 +32,13 @@ if get_config("new_relic_config_file", "") == "":
     )
 
     logger = Logger().get_logger(__name__)
-    logger.info("Load newrelic config file {}".format(file))
-    newrelic.agent.initialize(file)
+
+    if not os.path.isfile(file):
+        # Disable New Relic
+        os.environ["NEW_RELIC_STATUS"] = "disabled"
+        logger.warning("Newrelic is disabled: newrelic.ini is missing")
+    else:
+        # Enable New Relic
+        os.environ["NEW_RELIC_STATUS"] = "enabled"
+        logger.info("Load newrelic config file {}".format(file))
+        newrelic.agent.initialize(file)
