@@ -15,6 +15,7 @@
 import json
 import time
 
+import newrelic.agent
 from django_rq import job
 
 from app.shortcuts import Logger
@@ -25,6 +26,7 @@ from app.repository.code_repository import CodeRepository
 
 
 @job
+@newrelic.agent.background_task()
 def run(task_id):
     """
     Run Code in Background

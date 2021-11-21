@@ -12,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import newrelic.agent
 from django_rq import job
 
 from app.shortcuts import Logger
 
 
 @job
+@newrelic.agent.background_task()
 def ping():
     """
     Ping Check
