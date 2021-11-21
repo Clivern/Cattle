@@ -1,6 +1,7 @@
 [Unit]
 Description=Gunicorn Instance to Serve Bulldog API
 After=network.target
+
 StartLimitIntervalSec=500
 StartLimitBurst=5
 
@@ -10,7 +11,8 @@ Group=www-data
 WorkingDirectory=/srv/app/current
 Restart=on-failure
 RestartSec=5s
-ExecStart=/srv/app/current/venv/bin/gunicorn --workers 3 --bind unix:/run/bulldog.sock app.wsgi
+Environment=NEW_RELIC_CONFIG_FILE=/srv/app/current/newrelic.ini
+ExecStart=/srv/app/current/venv/bin/newrelic-admin run-program /srv/app/current/venv/bin/gunicorn --workers 3 --bind unix:/run/bulldog.sock app.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 

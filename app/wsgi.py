@@ -13,31 +13,13 @@
 # limitations under the License.
 
 import os
-import newrelic.agent
 
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
-os.environ.setdefault('NEW_RELIC_STATUS', 'disabled')
 
 application = get_wsgi_application()
 
-from app import APP_ROOT                                    # noqa: E402
-from app.shortcuts import get_config                        # noqa: E402
-from app.shortcuts import Logger                            # noqa: E402
+from app.new_relic import setup_new_relic                   # noqa: E402
 
-if get_config("new_relic_config_file", "") == "":
-    file = "{}/{}".format(
-        APP_ROOT,
-        get_config("new_relic_config_file_path", "newrelic.ini")
-    )
-
-    logger = Logger().get_logger(__name__)
-
-    if os.path.isfile(file):
-        # Enable New Relic
-        os.environ["NEW_RELIC_STATUS"] = "enabled"
-        logger.info("Load newrelic config file {}".format(file))
-        newrelic.agent.initialize(file)
-    else:
-        logger.warning("Newrelic will be disabled since newrelic.ini config is missing")
+setup_new_relic()
