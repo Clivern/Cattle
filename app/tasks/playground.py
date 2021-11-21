@@ -13,11 +13,13 @@
 # limitations under the License.
 
 import json
+import time
 
 from django_rq import job
 
 from app.shortcuts import Logger
 from app.runner.snippet import Snippet
+from app.shortcuts import record_metric
 from app.repository.task_repository import TaskRepository
 from app.repository.code_repository import CodeRepository
 
@@ -31,6 +33,8 @@ def run(task_id):
         task_id: The Async Task ID
     """
     logger = Logger().get_logger(__name__)
+    start_time = time.time()
+
     logger.info("Run task with id {} in background".format(task_id))
 
     task_repository = TaskRepository()
@@ -66,6 +70,15 @@ def run(task_id):
         result = None
         status = TaskRepository.FAILED
         logger.error("Task with uuid {} failed: {}".format(task.uuid, str(e)))
+
+    duration = (time.time() - start_time) * 1000
+
+    # Send Metrics to NR
+    record_metric("Task/Playground/TotalCount", 1)
+    record_metric("Task/Playground/{}".format("SuccessCount" if status == TaskRepository.SUCCEEDED else "FailCount"), 1)
+    record_metric("Task/Playground/DurationMillisec", duration)
+
+    logger.info("Task with uuid {} spent {} millisec".format(task.uuid, duration))
 
     task_repository.update_one_by_id(task.id, {
         "result": json.dumps(result) if result is not None else "{}",

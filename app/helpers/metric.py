@@ -37,4 +37,5 @@ def record_metric(metric, count):
     # Report the metric
     metric = "{}/{}".format(get_config("app_name", "Bulldog"), metric)
     logger.info("Push metric with key {} and value {}".format(metric, str(count)))
-    newrelic.agent.record_custom_metric(metric, count)
+
+    newrelic.agent.record_custom_metric(metric, count, newrelic.agent.application())
