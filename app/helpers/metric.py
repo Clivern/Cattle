@@ -30,7 +30,7 @@ def record_metric(metric, count):
     logger = Logger().get_logger(__name__)
 
     # Skip Reporting
-    if os.environ["NEW_RELIC_STATUS"] == "disabled":
+    if "NEW_RELIC_STATUS" not in os.environ.keys() or os.environ["NEW_RELIC_STATUS"] == "disabled":
         logger.warning("Skip metric {} reporting: newrelic.ini is missing".format(metric))
         return
 
