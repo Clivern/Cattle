@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="Bulldog Logo" src="/assets/img/logo.png" height="200" />
+    <img alt="Bulldog Logo" src="/assets/img/logo.png" height="150" />
     <h3 align="center">Bulldog</h3>
     <p align="center">A Platform to Run and Share Code.</p>
     <p align="center">
