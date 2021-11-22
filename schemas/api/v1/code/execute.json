@@ -1,7 +1,7 @@
 {
    "$id":"api_v1_code_execute_endpoint",
    "$schema":"http://json-schema.org/draft-07/schema#",
-   "title":"createEntityEndpoint",
+   "title":"executeEntityEndpoint",
    "type":"object",
    "properties":{
       "content":{
