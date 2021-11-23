@@ -8,24 +8,24 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: () => import("../views/Home.vue"),
+    name: "HomePage",
+    component: () => import("../views/HomePage.vue"),
     meta: {
       requiresAuth: false,
     },
   },
   {
     path: "/p/:id",
-    name: "Code",
-    component: () => import("../views/Code.vue"),
+    name: "CodePage",
+    component: () => import("../views/CodePage.vue"),
     meta: {
       requiresAuth: false,
     },
   },
   {
     path: "/404",
-    name: "NotFound",
-    component: () => import("../views/NotFound.vue"),
+    name: "NotFoundPage",
+    component: () => import("../views/NotFoundPage.vue"),
   },
   {
     path: "*",

@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <div class="not_found">
+  <div class="code_page">
     <h2>500 Error</h2>
   </div>
 </template>

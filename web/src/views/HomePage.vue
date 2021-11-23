@@ -1,12 +1,12 @@
 <!-- @format -->
 
 <template>
-  <div class="home">
+  <div class="home_page">
     <br />
     <div class="columns">
       <div class="column is-full logo">
         <a href="/">
-          <img alt="logo" src="../assets/logo.png" width="150" />
+          <img alt="logo" src="../assets/logo.png" width="130" />
         </a>
       </div>
     </div>
@@ -100,7 +100,7 @@ import "codemirror/mode/go/go.js";
 import "codemirror/theme/hopscotch.css";
 
 export default {
-  name: "home",
+  name: "home_page",
   components: {
     codemirror,
   },
