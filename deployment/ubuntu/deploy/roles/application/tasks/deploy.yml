@@ -137,17 +137,17 @@
     executable: /bin/bash
   tags: [ deploy ]
 
-- name: Create bulldog service file
+- name: Create winkie service file
   template:
-    src: bulldog.service.j2
-    dest: /etc/systemd/system/bulldog.service
+    src: winkie.service.j2
+    dest: /etc/systemd/system/winkie.service
     mode: "0750"
-  notify: reload bulldog service
+  notify: reload winkie service
   tags: [ deploy ]
 
-- name: Enable and start bulldog service
+- name: Enable and start winkie service
   systemd:
-    name: bulldog
+    name: winkie
     state: started
     enabled: yes
   tags: [ deploy ]
@@ -156,13 +156,13 @@
   pause:
     seconds: 2
 
-- name: restart bulldog service
+- name: restart winkie service
   systemd:
     state: restarted
-    name: bulldog
+    name: winkie
   tags: [ deploy ]
 
-- name: Create bulldog workers service file
+- name: Create winkie workers service file
   template:
     src: worker.service.j2
     dest: /etc/systemd/system/worker@.service
@@ -170,7 +170,7 @@
   notify: reload workers service
   tags: [ deploy ]
 
-- name: Enable and start bulldog workers service
+- name: Enable and start winkie workers service
   systemd:
     name: worker@{{ item }}
     state: started
@@ -182,7 +182,7 @@
   pause:
     seconds: 2
 
-- name: restart bulldog workers service
+- name: restart winkie workers service
   systemd:
     state: restarted
     name: worker@{{ item }}

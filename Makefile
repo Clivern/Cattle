@@ -10,7 +10,7 @@ GUNICORN     ?= gunicorn
 
 help: Makefile
 	@echo
-	@echo " Choose a command run in Bulldog:"
+	@echo " Choose a command run in Winkie:"
 	@echo
 	@sed -n 's/^##//p' $< | column -t -s ':' |  sed -e 's/^/ /'
 	@echo

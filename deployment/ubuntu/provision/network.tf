@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "digitalocean_vpc" "bulldog_infra" {
+resource "digitalocean_vpc" "winkie_infra" {
 
-    name = "bulldog-infra-vpc"
+    name = "winkie-infra-vpc"
 
     region = var.region
 }

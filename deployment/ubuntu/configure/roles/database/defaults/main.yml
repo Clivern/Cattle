@@ -15,7 +15,7 @@
 ---
 # root_username: root
 # root_password: root_R2ZBmTR6nED6a71AxeTO2DSc
-# app_db_name: bulldog
+# app_db_name: winkie
 # app_db_username: admin
 # app_db_password: secret
 # allow_access_from: "127.0.0.1"

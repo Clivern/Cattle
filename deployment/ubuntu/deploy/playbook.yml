@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ---
-- hosts: bulldog_server
+- hosts: winkie_server
 
   vars_files:
     - ./vars/default.yml
@@ -31,7 +31,7 @@
 
     - name: "app_db_name"
       prompt: "Application MySQL Database Name"
-      default: "bulldog"
+      default: "winkie"
       private: no
 
     - name: "app_db_username"

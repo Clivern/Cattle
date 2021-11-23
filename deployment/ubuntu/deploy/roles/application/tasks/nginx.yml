@@ -21,8 +21,8 @@
 
 - name: Create the nginx configuration file
   template:
-    src: bulldog.sh.j2
-    dest: /etc/nginx/sites-available/bulldog.sh
+    src: winkie.sh.j2
+    dest: /etc/nginx/sites-available/winkie.sh
     backup: yes
     mode: '0644'
   notify: reload nginx
@@ -37,8 +37,8 @@
 
 - name: Ensure that the application site is enabled
   file:
-    src: /etc/nginx/sites-available/bulldog.sh
-    dest: /etc/nginx/sites-enabled/bulldog.sh
+    src: /etc/nginx/sites-available/winkie.sh
+    dest: /etc/nginx/sites-enabled/winkie.sh
     state: link
   notify: reload nginx
   tags: [ nginx ]
