@@ -425,10 +425,9 @@ export default {
                 }
               );
           },
-          (err) => {
-            // TODO: Fix this
-            this.output = err.response.data.errorMessage;
+          () => {
             this.loader.ref.close();
+            this.$router.push({ name: "NotFoundPage" });
           }
         );
     },
