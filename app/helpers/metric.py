@@ -36,7 +36,7 @@ def record_metric(metric, count):
         return
 
     # Report the metric
-    metric = "{}/{}".format(get_config("app_name", "Winkie"), metric)
+    metric = "{}/{}".format(get_config("app_name", "Cattle"), metric)
     logger.info("Push metric with key {} and value {}".format(metric, str(count)))
 
     newrelic.agent.record_custom_metric(metric, count, newrelic.agent.application())

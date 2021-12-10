@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "digitalocean_droplet" "winkie" {
+resource "digitalocean_droplet" "cattle" {
 
   image = var.image
 
@@ -28,5 +28,5 @@ resource "digitalocean_droplet" "winkie" {
 
   ssh_keys = [data.digitalocean_ssh_key.main.id]
 
-  vpc_uuid = digitalocean_vpc.winkie_infra.id
+  vpc_uuid = digitalocean_vpc.cattle_infra.id
 }

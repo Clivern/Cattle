@@ -26,7 +26,7 @@ logrotate_scripts:
       - create 0644 root www-data
     scripts:
         postrotate: "/bin/kill -USR1 `cat /run/nginx.pid 2>/dev/null` 2>/dev/null || true"
-  - name: winkie
+  - name: cattle
     log_dir: '/srv/app/shared/logs'
     log_extension: 'log'
     options:
@@ -37,4 +37,4 @@ logrotate_scripts:
       - compress
       - create 0644 root www-data
     scripts:
-        postrotate: "systemctl restart winkie.service > /dev/null 2>&1 || true"
+        postrotate: "systemctl restart cattle.service > /dev/null 2>&1 || true"

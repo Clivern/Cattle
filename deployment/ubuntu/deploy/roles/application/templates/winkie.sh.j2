@@ -1,12 +1,12 @@
 server {
     listen      80;
     listen      [::]:80;
-    server_name www.winkie.sh;
+    server_name www.cattle.sh;
     set         $base /srv/app/current;
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/run/winkie.sock;
+        proxy_pass http://unix:/run/cattle.sock;
         uwsgi_param Host              $host;
         uwsgi_param X-Real-IP         $remote_addr;
         uwsgi_param X-Forwarded-For   $proxy_add_x_forwarded_for;
@@ -46,6 +46,6 @@ server {
 server {
     listen      80;
     listen      [::]:80;
-    server_name .winkie.sh;
-    return      301 http://www.winkie.sh$request_uri;
+    server_name .cattle.sh;
+    return      301 http://www.cattle.sh$request_uri;
 }

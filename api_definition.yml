@@ -1,18 +1,18 @@
 openapi: 3.0.1
 info:
-  title: Winkie
+  title: Cattle
   description: 🐺 Platform to Run and Share Code.
   contact:
     email: hello@clivern.com
   license:
     name: Apache License 2.0
-    url: https://github.com/Clivern/Winkie/blob/main/LICENSE
+    url: https://github.com/Clivern/Cattle/blob/main/LICENSE
   version: 0.2.0
 externalDocs:
-  description: Find out more about winkie
-  url: https://github.com/Clivern/Winkie
+  description: Find out more about cattle
+  url: https://github.com/Clivern/Cattle
 servers:
-  - url: https://winkie.sh/
+  - url: https://cattle.sh/
 paths:
   /_health:
     get:

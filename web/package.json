@@ -1,6 +1,6 @@
 {
-  "name": "winkie",
-  "version": "0.0.1",
+  "name": "cattle",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

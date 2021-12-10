@@ -16,6 +16,6 @@
 # app_user: clivern
 # app_group: clivern
 # app_version: 0.1.0
-git_repo: https://github.com/Clivern/Winkie.git
+git_repo: https://github.com/Clivern/Cattle.git
 # newrelic_license_key: xxx
 # workers_counts: 3

@@ -16,6 +16,6 @@
 # app_user: appmgt
 # app_group: appmgt
 # app_version: 0.1.0
-git_repo: https://github.com/Clivern/Winkie.git
+git_repo: https://github.com/Clivern/Cattle.git
 # newrelic_license_key: xxxx-xxxx-xxxx-xxxx
 # workers_counts: 3

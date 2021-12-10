@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "digitalocean_vpc" "winkie_infra" {
+resource "digitalocean_vpc" "cattle_infra" {
 
-    name = "winkie-infra-vpc"
+    name = "cattle-infra-vpc"
 
     region = var.region
 }

@@ -115,17 +115,17 @@
     executable: /bin/bash
   tags: [ deploy ]
 
-- name: Create winkie service file
+- name: Create cattle service file
   template:
-    src: winkie.service.j2
-    dest: /etc/systemd/system/winkie.service
+    src: cattle.service.j2
+    dest: /etc/systemd/system/cattle.service
     mode: "0750"
-  notify: reload winkie service
+  notify: reload cattle service
   tags: [ deploy ]
 
-- name: Enable and start winkie service
+- name: Enable and start cattle service
   systemd:
-    name: winkie
+    name: cattle
     state: started
     enabled: yes
   tags: [ deploy ]
@@ -134,13 +134,13 @@
   pause:
     seconds: 2
 
-- name: restart winkie service
+- name: restart cattle service
   systemd:
     state: restarted
-    name: winkie
+    name: cattle
   tags: [ deploy ]
 
-- name: Create winkie workers service file
+- name: Create cattle workers service file
   template:
     src: worker.service.j2
     dest: /etc/systemd/system/worker@.service
@@ -148,7 +148,7 @@
   notify: reload workers service
   tags: [ deploy ]
 
-- name: Enable and start winkie workers service
+- name: Enable and start cattle workers service
   systemd:
     name: worker@{{ item }}
     state: started
@@ -160,7 +160,7 @@
   pause:
     seconds: 2
 
-- name: restart winkie workers service
+- name: restart cattle workers service
   systemd:
     state: restarted
     name: worker@{{ item }}

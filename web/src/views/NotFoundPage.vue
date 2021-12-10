@@ -23,7 +23,11 @@
     <div class="columns">
       <div class="column is-full copyright">
         Powered by
-        <a href="https://clivern.com/" target="_blank" rel="noopener">
+        <a
+          href="https://github.com/Clivern/Cattle"
+          target="_blank"
+          rel="noopener"
+        >
           Clivern</a
         ><br />
       </div>

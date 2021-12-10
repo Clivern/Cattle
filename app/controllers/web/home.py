@@ -26,7 +26,7 @@ class Home(View, Controller):
 
     def get(self, request):
         return render(request, self.template_name, {
-            "title": get_config("app_name", "Winkie"),
+            "title": get_config("app_name", "Cattle"),
             "description": get_config("app_description", ""),
             "base_url": get_config("app_url", ""),
         })
