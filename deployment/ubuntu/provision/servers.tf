@@ -30,3 +30,10 @@ resource "digitalocean_droplet" "cattle" {
 
   vpc_uuid = digitalocean_vpc.cattle_infra.id
 }
+
+resource "digitalocean_floating_ip" "cattle" {
+
+  droplet_id = digitalocean_droplet.cattle.id
+
+  region     = digitalocean_droplet.cattle.region
+}
