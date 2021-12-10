@@ -1,0 +1,490 @@
+{
+  "name": "Cattle",
+  "description": null,
+  "permissions": "PUBLIC_READ_WRITE",
+  "pages": [
+    {
+      "name": "Cattle",
+      "description": null,
+      "widgets": [
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 1,
+            "row": 1,
+            "height": 3,
+            "width": 4
+          },
+          "title": "HTTP Request Count",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT count(newrelic.timeslice.value) AS `Cattle/HTTPRequestCount` FROM Metric WHERE metricTimesliceName = 'Cattle/HTTPRequestCount' AND `entity.guid` = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ' SINCE 30 MINUTES AGO TIMESERIES"
+              }
+            ],
+            "yAxisLeft": {
+              "zero": true
+            }
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.markdown"
+          },
+          "layout": {
+            "column": 5,
+            "row": 1,
+            "height": 6,
+            "width": 4
+          },
+          "title": "",
+          "rawConfiguration": {
+            "text": "[![Add Images](https://raw.githubusercontent.com/Clivern/Cattle/main/assets/img/logo.png)](https://cattle.sh/)"
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 9,
+            "row": 1,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Latency In Millisec",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT average(newrelic.timeslice.value) AS `Cattle/LatencyMillisec` FROM Metric WHERE metricTimesliceName = 'Cattle/LatencyMillisec' AND `entity.guid` = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ' SINCE 30 MINUTES AGO TIMESERIES"
+              }
+            ],
+            "yAxisLeft": {
+              "zero": true
+            }
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 1,
+            "row": 4,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Web transactions percentile",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT percentile(duration, 95) * 1000, percentile(duration, 99) * 1000, median(duration) * 1000 as Median, average(duration) * 1000 as Average FROM Transaction WHERE (entityGuid = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ') AND (transactionType = 'Web') SINCE 1800 seconds AGO TIMESERIES  EXTRAPOLATE"
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.line"
+          },
+          "layout": {
+            "column": 9,
+            "row": 4,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Apdex",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT apdex(apm.service.apdex) as 'App server', apdex(apm.service.apdex.user) as 'End user' FROM Metric WHERE (entity.guid = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ') SINCE 1800 seconds AGO TIMESERIES "
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 1,
+            "row": 7,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Throughput",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT rate(count(apm.service.transaction.duration), 1 minute) as 'Web throughput' FROM Metric WHERE (entity.guid = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ') AND (transactionType = 'Web') SINCE 1800 seconds AGO TIMESERIES "
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 5,
+            "row": 7,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Client Errors",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT count(newrelic.timeslice.value) AS `Cattle/ClientErrorsCount` FROM Metric WHERE metricTimesliceName = 'Cattle/ClientErrorsCount' AND `entity.guid` = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ' SINCE 30 MINUTES AGO TIMESERIES"
+              }
+            ],
+            "yAxisLeft": {
+              "zero": true
+            }
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 9,
+            "row": 7,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Error rate",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT count(apm.service.error.count) / count(apm.service.transaction.duration) as 'Web errors' FROM Metric WHERE (entity.guid = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ') AND (transactionType = 'Web') SINCE 1800 seconds AGO TIMESERIES "
+              },
+              {
+                "accountId": 2248790,
+                "query": "SELECT count(apm.service.error.count) / count(apm.service.transaction.duration) AS 'All errors' FROM Metric WHERE (entity.guid = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ') SINCE 1800 seconds AGO TIMESERIES "
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 1,
+            "row": 10,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Top database operations",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT sum(apm.service.datastore.operation.duration) * 1000 FROM Metric WHERE (entity.guid = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ') FACET `metricTimesliceName` LIMIT 5 SINCE 1800 seconds AGO TIMESERIES "
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 5,
+            "row": 10,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Top databases",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT average(apm.service.datastore.operation.duration) * 1000 FROM Metric WHERE (entity.guid = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ') FACET `datastoreType` LIMIT 5 SINCE 1800 seconds AGO TIMESERIES "
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 9,
+            "row": 10,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Top databases",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT rate(count(apm.service.datastore.operation.duration), 1 minute) FROM Metric WHERE (entity.guid = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ') FACET `datastoreType` LIMIT 5 SINCE 1800 seconds AGO TIMESERIES "
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 1,
+            "row": 13,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Run Code Endpoint",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT count(newrelic.timeslice.value) AS `Cattle/HTTPRequestCount/Route/App/Api/V1/Run_Code/Endpoint` FROM Metric WHERE metricTimesliceName = 'Cattle/HTTPRequestCount/Route/App/Api/V1/Run_Code/Endpoint' AND `entity.guid` = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ' SINCE 30 MINUTES AGO TIMESERIES"
+              }
+            ],
+            "yAxisLeft": {
+              "zero": true
+            }
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 5,
+            "row": 13,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Execute Code Endpoint",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT count(newrelic.timeslice.value) AS `Cattle/HTTPRequestCount/Route/App/Api/V1/Execute_Code/Endpoint` FROM Metric WHERE metricTimesliceName = 'Cattle/HTTPRequestCount/Route/App/Api/V1/Execute_Code/Endpoint' AND `entity.guid` = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ' SINCE 30 MINUTES AGO TIMESERIES"
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.area"
+          },
+          "layout": {
+            "column": 9,
+            "row": 13,
+            "height": 3,
+            "width": 4
+          },
+          "title": "Create Code Endpoint",
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT count(newrelic.timeslice.value) AS `Cattle/HTTPRequestCount/Route/App/Api/V1/Create_Code/Endpoint` FROM Metric WHERE metricTimesliceName = 'Cattle/HTTPRequestCount/Route/App/Api/V1/Create_Code/Endpoint' AND `entity.guid` = 'MjI0ODc5MHxBUE18QVBQTElDQVRJT058MTQ0NTQxMzYyMQ' SINCE 30 MINUTES AGO TIMESERIES"
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.billboard"
+          },
+          "layout": {
+            "column": 1,
+            "row": 16,
+            "height": 4,
+            "width": 2
+          },
+          "title": "User time on the site",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT percentile(pageHide, 75), percentile(windowUnload, 75) FROM PageViewTiming WHERE (appId = 1445413621) SINCE 1800 seconds AGO"
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.billboard"
+          },
+          "layout": {
+            "column": 3,
+            "row": 16,
+            "height": 4,
+            "width": 2
+          },
+          "title": "Core web vitals - LCP",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT percentile(largestContentfulPaint, 75) FROM PageViewTiming WHERE (appId = 1445413621) SINCE 1800 seconds AGO"
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.bar"
+          },
+          "layout": {
+            "column": 5,
+            "row": 16,
+            "height": 2,
+            "width": 4
+          },
+          "title": "First interaction by device type",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT percentile(firstInteraction, 75) FROM PageViewTiming WHERE (appId = 1445413621) AND (deviceType != 'Unknown') AND (firstInteraction < 300) FACET `deviceType` LIMIT 10 SINCE 1800 seconds AGO"
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.line"
+          },
+          "layout": {
+            "column": 9,
+            "row": 16,
+            "height": 4,
+            "width": 4
+          },
+          "title": "Top countries by average page load time",
+          "rawConfiguration": {
+            "accountId": 2248790,
+            "compareWith": [],
+            "duration": 1800000,
+            "entityIds": [
+              1445413621
+            ],
+            "limit": 8,
+            "metrics": [
+              {
+                "name": "EndUser/Country/%",
+                "scope": "",
+                "values": [
+                  "average_response_time"
+                ]
+              },
+              {
+                "name": "EndUser/Country/\\%",
+                "scope": "",
+                "values": [
+                  "average_response_time"
+                ]
+              }
+            ],
+            "orderBy": "average_response_time",
+            "rawMetricName": "EndUser/Country/%"
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.bar"
+          },
+          "layout": {
+            "column": 5,
+            "row": 18,
+            "height": 2,
+            "width": 4
+          },
+          "title": "Longest first input delay by URL",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT percentile(firstInputDelay, 75) FROM PageViewTiming WHERE (appId = 1445413621) AND (firstInteraction < 300) FACET `pageUrl` LIMIT 10 SINCE 1 day ago"
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        },
+        {
+          "visualization": {
+            "id": "viz.bar"
+          },
+          "layout": {
+            "column": 1,
+            "row": 20,
+            "height": 2,
+            "width": 4
+          },
+          "title": "First interaction by user agent",
+          "rawConfiguration": {
+            "nrqlQueries": [
+              {
+                "accountId": 2248790,
+                "query": "SELECT percentile(firstInteraction, 75) FROM PageViewTiming WHERE (appId = 1445413621) AND (firstInteraction < 300) FACET `userAgentName`, `userAgentVersion` LIMIT 10 SINCE 1800 seconds AGO"
+              }
+            ]
+          },
+          "linkedEntityGuids": null
+        }
+      ]
+    }
+  ]
+}

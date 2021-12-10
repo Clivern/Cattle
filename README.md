@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="Cattle Logo" src="/assets/img/logo.png" height="150" />
+    <img alt="Cattle Logo" src="/assets/img/logo.png" height="200" />
     <h3 align="center">Cattle</h3>
     <p align="center">A Platform to Run and Share Code.</p>
     <p align="center">
