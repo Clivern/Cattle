@@ -18,3 +18,4 @@
 # app_version: 0.1.0
 git_repo: https://github.com/Clivern/Bulldog.git
 # newrelic_license_key: xxx
+# workers_counts: 3

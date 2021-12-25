@@ -64,5 +64,10 @@
       default: "xxxx-xxxx-xxxx-xxxx"
       private: no
 
+    - name: "workers_counts"
+      prompt: "Async Workers Count"
+      default: 3
+      private: no
+
   roles:
     - application

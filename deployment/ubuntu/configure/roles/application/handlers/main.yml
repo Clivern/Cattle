@@ -30,8 +30,9 @@
     daemon_reload: yes
     name: bulldog
 
-- name: reload worker service
+- name: reload workers service
   systemd:
     state: restarted
     daemon_reload: yes
-    name: worker
+    name: worker@{{ item }}
+  with_sequence: start=1 end="{{ workers_counts }}"

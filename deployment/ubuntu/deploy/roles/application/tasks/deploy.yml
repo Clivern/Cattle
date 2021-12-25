@@ -82,6 +82,19 @@
     state: link
   tags: [ deploy ]
 
+- name: Remove current release mount
+  file:
+    path: /srv/app/releases/{{ app_version }}/storage/mount
+    state: absent
+  tags: [ deploy ]
+
+- name: Update mount symlink
+  file:
+    src: /srv/app/shared/mount
+    dest: /srv/app/releases/{{ app_version }}/storage/mount
+    state: link
+  tags: [ deploy ]
+
 - name: Update release owner and permissions
   file:
     dest: /srv/app/releases/{{ app_version }}
@@ -102,6 +115,15 @@
 - name: Update logs owner and permissions
   file:
     dest: /srv/app/shared/logs
+    owner: "{{ app_user }}"
+    group: "www-data"
+    mode: "0755"
+    recurse: yes
+  tags: [ deploy ]
+
+- name: Update mount owner and permissions
+  file:
+    dest: /srv/app/shared/mount
     owner: "{{ app_user }}"
     group: "www-data"
     mode: "0755"
@@ -130,9 +152,9 @@
     enabled: yes
   tags: [ deploy ]
 
-- name: Pause for 10 seconds
+- name: Pause for 2 seconds
   pause:
-    seconds: 10
+    seconds: 2
 
 - name: restart bulldog service
   systemd:
@@ -140,27 +162,29 @@
     name: bulldog
   tags: [ deploy ]
 
-- name: Create bulldog worker service file
+- name: Create bulldog workers service file
   template:
     src: worker.service.j2
-    dest: /etc/systemd/system/worker.service
+    dest: /etc/systemd/system/worker@.service
     mode: "0750"
-  notify: reload worker service
+  notify: reload workers service
   tags: [ deploy ]
 
-- name: Enable and start bulldog worker service
+- name: Enable and start bulldog workers service
   systemd:
-    name: worker
+    name: worker@{{ item }}
     state: started
     enabled: yes
+  with_sequence: start=1 end="{{ workers_counts }}"
   tags: [ deploy ]
 
-- name: Pause for 10 seconds
+- name: Pause for 2 seconds
   pause:
-    seconds: 10
+    seconds: 2
 
-- name: restart bulldog worker service
+- name: restart bulldog workers service
   systemd:
     state: restarted
-    name: worker
+    name: worker@{{ item }}
+  with_sequence: start=1 end="{{ workers_counts }}"
   tags: [ deploy ]
