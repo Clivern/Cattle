@@ -18,10 +18,10 @@ class ErrorCodes():
 
     CLIENT_ERROR = {
         "code": "APP0001",
-        "reference": "https://cookie.sh/"
+        "reference": "https://bulldog.sh/"
     }
 
     SERVER_ERROR = {
         "code": "APP0002",
-        "reference": "https://cookie.sh/"
+        "reference": "https://bulldog.sh/"
     }

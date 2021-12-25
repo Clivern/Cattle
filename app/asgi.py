@@ -1,5 +1,5 @@
 """
-ASGI config for Cookie project.
+ASGI config for Bulldog project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

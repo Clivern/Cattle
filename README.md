@@ -1,10 +1,10 @@
 <p align="center">
-    <img alt="Cookie Logo" src="/assets/img/logo.png" height="200" />
-    <h3 align="center">Cookie</h3>
+    <img alt="Bulldog Logo" src="/assets/img/logo.png" height="200" />
+    <h3 align="center">Bulldog</h3>
     <p align="center">A Platform to Run and Share Code.</p>
     <p align="center">
-        <a href="https://github.com/Clivern/Cookie/actions/workflows/ci.yml">
-            <img src="https://github.com/Clivern/Cookie/actions/workflows/ci.yml/badge.svg"/>
+        <a href="https://github.com/Clivern/Bulldog/actions/workflows/ci.yml">
+            <img src="https://github.com/Clivern/Bulldog/actions/workflows/ci.yml/badge.svg"/>
         </a>
     </p>
 </p>
@@ -12,18 +12,18 @@
 
 ## Versioning
 
-For transparency into our release cycle and in striving to maintain backward compatibility, Cookie is maintained under the [Semantic Versioning guidelines](https://semver.org/) and release process is predictable and business-friendly.
+For transparency into our release cycle and in striving to maintain backward compatibility, Bulldog is maintained under the [Semantic Versioning guidelines](https://semver.org/) and release process is predictable and business-friendly.
 
-See the [Releases section of our GitHub project](https://github.com/clivern/cookie/releases) for changelogs for each release version of Cookie. It contains summaries of the most noteworthy changes made in each release. Also see the [Milestones section](https://github.com/clivern/cookie/milestones) for the future roadmap.
+See the [Releases section of our GitHub project](https://github.com/clivern/bulldog/releases) for changelogs for each release version of Bulldog. It contains summaries of the most noteworthy changes made in each release. Also see the [Milestones section](https://github.com/clivern/bulldog/milestones) for the future roadmap.
 
 ## Bug tracker
 
-If you have any suggestions, bug reports, or annoyances please report them to our issue tracker at https://github.com/clivern/cookie/issues
+If you have any suggestions, bug reports, or annoyances please report them to our issue tracker at https://github.com/clivern/bulldog/issues
 
 
 ## Security Issues
 
-If you discover a security vulnerability within Cookie, please send an email to [hello@clivern.com](mailto:hello@clivern.com)
+If you discover a security vulnerability within Bulldog, please send an email to [hello@clivern.com](mailto:hello@clivern.com)
 
 
 ## Contributing
@@ -45,6 +45,6 @@ Shoutout to these open source projects and their maintainers.
 
 ## License
 
-© 2021, Cookie. Released under [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+© 2021, Bulldog. Released under [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
-**Cookie** is authored and maintained by [@Clivern](https://github.com/clivern).
+**Bulldog** is authored and maintained by [@Clivern](https://github.com/clivern).

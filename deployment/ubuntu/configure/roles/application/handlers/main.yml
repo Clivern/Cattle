@@ -24,11 +24,11 @@
     name: nginx
     state: reloaded
 
-- name: reload cookie service
+- name: reload bulldog service
   systemd:
     state: restarted
     daemon_reload: yes
-    name: cookie
+    name: bulldog
 
 - name: reload worker service
   systemd:

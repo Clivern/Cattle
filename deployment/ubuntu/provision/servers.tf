@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "digitalocean_droplet" "cookie" {
+resource "digitalocean_droplet" "bulldog" {
 
   image = var.image
 
@@ -28,5 +28,5 @@ resource "digitalocean_droplet" "cookie" {
 
   ssh_keys = [data.digitalocean_ssh_key.main.id]
 
-  vpc_uuid = digitalocean_vpc.cookie_infra.id
+  vpc_uuid = digitalocean_vpc.bulldog_infra.id
 }

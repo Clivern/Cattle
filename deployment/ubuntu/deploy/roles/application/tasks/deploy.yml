@@ -115,17 +115,17 @@
     executable: /bin/bash
   tags: [ deploy ]
 
-- name: Create cookie service file
+- name: Create bulldog service file
   template:
-    src: cookie.service.j2
-    dest: /etc/systemd/system/cookie.service
+    src: bulldog.service.j2
+    dest: /etc/systemd/system/bulldog.service
     mode: "0750"
-  notify: reload cookie service
+  notify: reload bulldog service
   tags: [ deploy ]
 
-- name: Enable and start cookie service
+- name: Enable and start bulldog service
   systemd:
-    name: cookie
+    name: bulldog
     state: started
     enabled: yes
   tags: [ deploy ]
@@ -134,13 +134,13 @@
   pause:
     seconds: 10
 
-- name: restart cookie service
+- name: restart bulldog service
   systemd:
     state: restarted
-    name: cookie
+    name: bulldog
   tags: [ deploy ]
 
-- name: Create cookie worker service file
+- name: Create bulldog worker service file
   template:
     src: worker.service.j2
     dest: /etc/systemd/system/worker.service
@@ -148,7 +148,7 @@
   notify: reload worker service
   tags: [ deploy ]
 
-- name: Enable and start cookie worker service
+- name: Enable and start bulldog worker service
   systemd:
     name: worker
     state: started
@@ -159,7 +159,7 @@
   pause:
     seconds: 10
 
-- name: restart cookie worker service
+- name: restart bulldog worker service
   systemd:
     state: restarted
     name: worker

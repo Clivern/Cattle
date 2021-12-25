@@ -1,12 +1,12 @@
 server {
     listen      80;
     listen      [::]:80;
-    server_name www.cookie.sh;
+    server_name www.bulldog.sh;
     set         $base /srv/app/current;
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/run/cookie.sock;
+        proxy_pass http://unix:/run/bulldog.sock;
         uwsgi_param Host              $host;
         uwsgi_param X-Real-IP         $remote_addr;
         uwsgi_param X-Forwarded-For   $proxy_add_x_forwarded_for;
@@ -46,6 +46,6 @@ server {
 server {
     listen      80;
     listen      [::]:80;
-    server_name .cookie.sh;
-    return      301 http://www.cookie.sh$request_uri;
+    server_name .bulldog.sh;
+    return      301 http://www.bulldog.sh$request_uri;
 }

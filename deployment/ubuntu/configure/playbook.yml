@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ---
-- hosts: cookie_server
+- hosts: bulldog_server
 
   vars_files:
     - ./vars/default.yml
@@ -56,7 +56,7 @@
 
     - name: "app_db_name"
       prompt: "Application MySQL Database Name"
-      default: "cookie"
+      default: "bulldog"
       private: no
 
     - name: "app_db_username"

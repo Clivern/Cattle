@@ -5,7 +5,7 @@
 ```bash
 region = "nyc3"
 ssh_key = "clivern"
-name = "cookie.sh"
+name = "bulldog.sh"
 droplet_size = "s-1vcpu-2gb"
 image = "ubuntu-20-04-x64"
 ```
