@@ -14,3 +14,4 @@
 
 from app.helpers.configs import get_config      # noqa: F401
 from app.util.logger import Logger              # noqa: F401
+from app.helpers.metric import record_metric    # noqa: F401

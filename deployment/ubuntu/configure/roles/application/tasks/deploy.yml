@@ -82,6 +82,19 @@
     state: link
   tags: [ deploy ]
 
+- name: Remove current release mount
+  file:
+    path: /srv/app/releases/{{ app_version }}/storage/mount
+    state: absent
+  tags: [ deploy ]
+
+- name: Update mount symlink
+  file:
+    src: /srv/app/shared/mount
+    dest: /srv/app/releases/{{ app_version }}/storage/mount
+    state: link
+  tags: [ deploy ]
+
 - name: Update release owner and permissions
   file:
     dest: /srv/app/releases/{{ app_version }}
@@ -102,6 +115,15 @@
 - name: Update logs owner and permissions
   file:
     dest: /srv/app/shared/logs
+    owner: "{{ app_user }}"
+    group: "www-data"
+    mode: "0755"
+    recurse: yes
+  tags: [ deploy ]
+
+- name: Update mount owner and permissions
+  file:
+    dest: /srv/app/shared/mount
     owner: "{{ app_user }}"
     group: "www-data"
     mode: "0755"
@@ -130,9 +152,9 @@
     enabled: yes
   tags: [ deploy ]
 
-- name: Pause for 10 seconds
+- name: Pause for 2 seconds
   pause:
-    seconds: 10
+    seconds: 2
 
 - name: restart bulldog service
   systemd:
@@ -155,9 +177,9 @@
     enabled: yes
   tags: [ deploy ]
 
-- name: Pause for 10 seconds
+- name: Pause for 2 seconds
   pause:
-    seconds: 10
+    seconds: 2
 
 - name: restart bulldog worker service
   systemd:
