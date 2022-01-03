@@ -51,9 +51,9 @@ def ping(task_id):
     duration = (time.time() - start_time) * 1000
 
     # Send Metrics to NR
-    record_metric("Task/Playground/TotalCount", 1)
-    record_metric("Task/Playground/SuccessCount", 1)
-    record_metric("Task/Playground/DurationMillisec", duration)
+    record_metric("Task/Ping/TotalCount", 1)
+    record_metric("Task/Ping/SuccessCount", 1)
+    record_metric("Task/Ping/DurationMillisec", duration)
 
     logger.info("Task with uuid {} spent {} millisec".format(task.uuid, duration))
 
