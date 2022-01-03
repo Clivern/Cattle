@@ -10,8 +10,8 @@ const createCodeAction = (payload) => {
   return ApiService.post("/api/v1/code", payload);
 };
 
-const getCodeAction = (slug) => {
-  return ApiService.get("/api/v1/code/" + slug);
+const getCodeAction = (id) => {
+  return ApiService.get("/api/v1/code/" + id);
 };
 
 const deleteCodeAction = (id, token) => {

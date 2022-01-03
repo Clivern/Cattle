@@ -5,6 +5,7 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+// Application Routes
 const routes = [
   {
     path: "/",
@@ -26,6 +27,17 @@ const routes = [
     path: "/404",
     name: "NotFoundPage",
     component: () => import("../views/NotFoundPage.vue"),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: "/500",
+    name: "ErrorPage",
+    component: () => import("../views/ErrorPage.vue"),
+    meta: {
+      requiresAuth: false,
+    },
   },
   {
     path: "*",
