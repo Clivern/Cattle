@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .client_error import ClientError
 
-class InvalidRequest(Exception):
+
+class InvalidRequest(ClientError):
     pass

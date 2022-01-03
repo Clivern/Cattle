@@ -23,6 +23,7 @@ from app.exceptions.access_forbidden import AccessForbidden
 from app.exceptions.invalid_request import InvalidRequest
 from app.exceptions.resource_not_found import ResourceNotFound
 from app.exceptions.internal_server_error import InternalServerError
+from app.exceptions.client_error import ClientError
 
 
 class Errors():
@@ -61,7 +62,7 @@ class Errors():
         Returns:
             an instance of JsonResponse
         """
-        if isinstance(exception, InternalServerError):
+        if not isinstance(exception, ClientError):
             self.logger.error(
                 _("The server encountered something unexpected! {method}:{path}  - {name} - {exception}").format(
                     method=request.method,

@@ -34,8 +34,8 @@ def run(task_id):
     Args:
         task_id: The Async Task ID
     """
-    logger = Logger().get_logger(__name__)
     start_time = time.time()
+    logger = Logger().get_logger(__name__)
 
     logger.info("Run task with id {} in background".format(task_id))
 

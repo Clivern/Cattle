@@ -137,3 +137,16 @@ class TaskRepository():
             return True
 
         return False
+
+    def get_latest_task(self):
+        """
+        Get The Latest Task
+
+        Returns:
+            The latest task object or None
+        """
+        try:
+            task = Task.objects.latest('id')
+            return None if task is None else task
+        except Exception:
+            return None

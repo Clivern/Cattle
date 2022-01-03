@@ -350,11 +350,15 @@ class RunCode(View, Controller):
             "result": "{}"
         })
 
-        self.logger.info("A new task with uuid {} got created".format(task.id))
+        if not task:
+            self.logger.error("Error while creating a new task")
+            raise InternalServerError("Internal Server Error.")
+
+        self.logger.info("A new task with uuid {} got created".format(task.uuid))
 
         run.delay(task.id)
 
-        self.logger.info("A new task with uuid {} sent to workers".format(task.id))
+        self.logger.info("A new task with uuid {} sent to workers".format(task.uuid))
 
         return JsonResponse({
             "id": task.uuid,
