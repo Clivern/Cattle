@@ -48,10 +48,10 @@ class Readiness():
 
     def check_workers(self, delay_benchmark_in_seconds=30):
         """
-        Ping workers & make sure they able to handle the workload
+        Check the delay and make sure the delay is accepted
 
         Returns:
-            Whether workers are able to handle the workload
+            Whether workers are fast or slow
         """
         self.logger.info("Check async workers health")
 
