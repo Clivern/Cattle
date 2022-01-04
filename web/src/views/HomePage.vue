@@ -150,7 +150,6 @@
     <div class="columns">
       <div class="column is-full copyright">
         Powered by
-        <span class="icon has-text-danger"><i class="fas fa-rocket"></i></span>
         <a href="https://clivern.com/" target="_blank" rel="noopener">
           Clivern</a
         ><br />
