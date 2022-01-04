@@ -27,13 +27,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/healthResponse'
+                $ref: '#/components/schemas/HealthResponse'
         500:
           description: System is down
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/healthResponse'
+                $ref: '#/components/schemas/HealthResponse'
   /_ready:
     get:
       tags:
@@ -45,42 +45,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/healthResponse'
+                $ref: '#/components/schemas/HealthResponse'
         500:
           description: System not ready to accept traffic
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/healthResponse'
-  /api/v1/task/{uuid}:
-    get:
-      tags:
-      - Task
-      summary: Get a Task by UUID
-      operationId: getTaskByUUID
-      parameters:
-      - name: uuid
-        in: path
-        description: The UUID of the task
-        required: true
-        schema:
-          type: string
-      responses:
-        200:
-          description: Successful Operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-        400:
-          description: Invalid Request
-          content: {}
-        404:
-          description: Task Not Found
-          content: {}
-        500:
-          description: Internal Server Error
-          content: {}
+                $ref: '#/components/schemas/HealthResponse'
   /api/v1/code:
     post:
       tags:
@@ -131,6 +102,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Code'
+        400:
+          description: Invalid Request
+          content: {}
         404:
           description: Resource Not Found
           content: {}
@@ -189,6 +163,9 @@ paths:
         204:
           description: Successful Operation
           content: {}
+        400:
+          description: Invalid Request
+          content: {}
         404:
           description: Resource Not Found
           content: {}
@@ -215,15 +192,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
+        400:
+          description: Invalid Request
+          content: {}
         404:
           description: Resource Not Found
           content: {}
         500:
           description: Internal Server Error
           content: {}
+  /api/v1/task/{uuid}:
+    get:
+      tags:
+      - Task
+      summary: Get a Task by UUID
+      operationId: getTaskByUUID
+      parameters:
+      - name: uuid
+        in: path
+        description: The UUID of the task
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        400:
+          description: Invalid Request
+          content: {}
+        404:
+          description: Task Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
 components:
   schemas:
-    healthResponse:
+    HealthResponse:
       type: object
       properties:
         status:
