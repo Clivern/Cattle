@@ -1,0 +1,277 @@
+# Use the following editor to view the documentation
+# https://editor.swagger.io/
+openapi: 3.0.1
+info:
+  title: Winkie
+  description: 🐺 Platform to Run and Share Code.
+  contact:
+    email: hello@clivern.com
+  license:
+    name: Apache License 2.0
+    url: https://github.com/Clivern/Winkie/blob/main/LICENSE
+  version: 0.2.0
+externalDocs:
+  description: Find out more about winkie
+  url: https://github.com/Clivern/Winkie
+servers:
+- url: https://winkie.sh/
+paths:
+  /_health:
+    get:
+      tags:
+      - Liveness
+      summary: Get system health status
+      responses:
+        200:
+          description: System is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse'
+        500:
+          description: System is down
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse'
+  /_ready:
+    get:
+      tags:
+      - Readiness
+      summary: Get system readiness
+      responses:
+        200:
+          description: System is ready to accept traffic
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse'
+        500:
+          description: System not ready to accept traffic
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse'
+  /api/v1/task/{uuid}:
+    get:
+      tags:
+      - Task
+      summary: Get a Task by UUID
+      operationId: getTaskByUUID
+      parameters:
+      - name: uuid
+        in: path
+        description: The UUID of the task
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        400:
+          description: Invalid Request
+          content: {}
+        404:
+          description: Task Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+  /api/v1/code:
+    post:
+      tags:
+      - Code
+      summary: Create a Code Item
+      operationId: createCodeRequest
+      requestBody:
+        description: The Code Request
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CodeRequest'
+        required: true
+      responses:
+        202:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        400:
+          description: Invalid Request
+          content: {}
+        404:
+          description: Resource Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: body
+  /api/v1/code/{id}:
+    get:
+      tags:
+      - Code
+      summary: Get a Code Item With ID (Slug or UUID)
+      operationId: getCodeItemRequest
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Code Item
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        404:
+          description: Resource Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+    put:
+      tags:
+      - Code
+      summary: Update a Code Item With ID (UUID)
+      operationId: createCodeItemRequest
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Code Item
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The Code Request
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CodeRequest'
+        required: true
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        400:
+          description: Invalid Request
+          content: {}
+        404:
+          description: Resource Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+      - Code
+      summary: Delete a Code Item With ID (UUID)
+      operationId: deleteCodeItemRequest
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Code Item
+        required: true
+        schema:
+          type: string
+      responses:
+        204:
+          description: Successful Operation
+          content: {}
+        404:
+          description: Resource Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+  /api/v1/code/{id}/run:
+    post:
+      tags:
+      - Code
+      summary: Run a Code Item With ID (UUID)
+      operationId: runCodeItemRequest
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Code Item
+        required: true
+        schema:
+          type: string
+      responses:
+        202:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        404:
+          description: Resource Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+components:
+  schemas:
+    healthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        errorMessage:
+          type: string
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        result:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    CodeRequest:
+      type: object
+      properties:
+        language:
+          type: string
+        version:
+          type: string
+        content:
+          type: string
+    Code:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int
+        uuid:
+          type: string
+        slug:
+          type: string
+        token:
+          type: string
+        language:
+          type: string
+        version:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
