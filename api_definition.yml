@@ -1,5 +1,3 @@
-# Use the following editor to view the documentation
-# https://editor.swagger.io/
 openapi: 3.0.1
 info:
   title: Winkie
@@ -14,21 +12,21 @@ externalDocs:
   description: Find out more about winkie
   url: https://github.com/Clivern/Winkie
 servers:
-- url: https://winkie.sh/
+  - url: https://winkie.sh/
 paths:
   /_health:
     get:
       tags:
-      - Liveness
+        - Liveness
       summary: Get system health status
       responses:
-        200:
+        '200':
           description: System is healthy
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthResponse'
-        500:
+        '500':
           description: System is down
           content:
             application/json:
@@ -37,25 +35,54 @@ paths:
   /_ready:
     get:
       tags:
-      - Readiness
+        - Readiness
       summary: Get system readiness
       responses:
-        200:
+        '200':
           description: System is ready to accept traffic
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthResponse'
-        500:
+        '500':
           description: System not ready to accept traffic
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthResponse'
+  /api/v1/execute:
+    post:
+      tags:
+        - Misc
+      summary: Execute a Code Item
+      requestBody:
+        description: The Code Request
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CodeRequest'
+        required: true
+      responses:
+        '202':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Invalid Request
+          content: {}
+        '404':
+          description: Resource Not Found
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: body
   /api/v1/code:
     post:
       tags:
-      - Code
+        - Code
       summary: Create a Code Item
       requestBody:
         description: The Code Request
@@ -65,61 +92,61 @@ paths:
               $ref: '#/components/schemas/CodeRequest'
         required: true
       responses:
-        202:
+        '202':
           description: Successful Operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Code'
-        400:
+        '400':
           description: Invalid Request
           content: {}
-        404:
+        '404':
           description: Resource Not Found
           content: {}
-        500:
+        '500':
           description: Internal Server Error
           content: {}
       x-codegen-request-body-name: body
   /api/v1/code/{id}:
     get:
       tags:
-      - Code
+        - Code
       summary: Get a Code Item With ID (Slug or UUID)
       parameters:
-      - name: id
-        in: path
-        description: The ID of the Code Item
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          description: The ID of the Code Item
+          required: true
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Successful Operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Code'
-        400:
+        '400':
           description: Invalid Request
           content: {}
-        404:
+        '404':
           description: Resource Not Found
           content: {}
-        500:
+        '500':
           description: Internal Server Error
           content: {}
     put:
       tags:
-      - Code
+        - Code
       summary: Update a Code Item With ID (UUID)
       parameters:
-      - name: id
-        in: path
-        description: The ID of the Code Item
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          description: The ID of the Code Item
+          required: true
+          schema:
+            type: string
       requestBody:
         description: The Code Request
         content:
@@ -128,100 +155,100 @@ paths:
               $ref: '#/components/schemas/CodeRequest'
         required: true
       responses:
-        200:
+        '200':
           description: Successful Operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Code'
-        400:
+        '400':
           description: Invalid Request
           content: {}
-        404:
+        '404':
           description: Resource Not Found
           content: {}
-        500:
+        '500':
           description: Internal Server Error
           content: {}
       x-codegen-request-body-name: body
     delete:
       tags:
-      - Code
+        - Code
       summary: Delete a Code Item With ID (UUID)
       parameters:
-      - name: id
-        in: path
-        description: The ID of the Code Item
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          description: The ID of the Code Item
+          required: true
+          schema:
+            type: string
       responses:
-        204:
+        '204':
           description: Successful Operation
           content: {}
-        400:
+        '400':
           description: Invalid Request
           content: {}
-        404:
+        '404':
           description: Resource Not Found
           content: {}
-        500:
+        '500':
           description: Internal Server Error
           content: {}
   /api/v1/code/{id}/run:
     post:
       tags:
-      - Code
+        - Code
       summary: Run a Code Item With ID (UUID)
       parameters:
-      - name: id
-        in: path
-        description: The ID of the Code Item
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          description: The ID of the Code Item
+          required: true
+          schema:
+            type: string
       responses:
-        202:
+        '202':
           description: Successful Operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-        400:
+        '400':
           description: Invalid Request
           content: {}
-        404:
+        '404':
           description: Resource Not Found
           content: {}
-        500:
+        '500':
           description: Internal Server Error
           content: {}
-  /api/v1/task/{uuid}:
+  /api/v1/task/{id}:
     get:
       tags:
-      - Task
-      summary: Get a Task by UUID
+        - Task
+      summary: Get a Task by ID (UUID)
       parameters:
-      - name: uuid
-        in: path
-        description: The UUID of the task
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          description: The UUID of the task
+          required: true
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Successful Operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-        400:
+        '400':
           description: Invalid Request
           content: {}
-        404:
+        '404':
           description: Task Not Found
           content: {}
-        500:
+        '500':
           description: Internal Server Error
           content: {}
 components:
