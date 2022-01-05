@@ -239,6 +239,58 @@ export default {
 
     runCode() {
       this.output = "sit tight while we run your code ...";
+
+      this.$store
+        .dispatch("api/post", {
+          uri: "/api/v1/execute",
+          request: {
+            content: this.code,
+            language: this.form.lang,
+            version: this.form.version,
+          },
+        })
+        .then(
+          (response) => {
+            var timer = setInterval(() => {
+              this.$store
+                .dispatch("api/get", {
+                  uri: "/api/v1/task/" + response.data.id,
+                })
+                .then(
+                  (response) => {
+                    let status = response.data.status;
+
+                    if (status == "SUCCEEDED") {
+                      this.output = response.data.result.output;
+
+                      this.output += "\n\n----\n";
+                      this.output +=
+                        "Build Time: " +
+                        response.data.result.build_time +
+                        " msec\n";
+                      this.output +=
+                        "Execution Time: " +
+                        response.data.result.execution_time +
+                        " msec\n";
+                      this.output += "\n";
+                      clearInterval(timer);
+                    }
+
+                    if (status == "FAILED") {
+                      // TODO: Add Failed Message
+                      clearInterval(timer);
+                    }
+                  },
+                  (err) => {
+                    this.output = err.response.data.errorMessage;
+                  }
+                );
+            }, 2000);
+          },
+          (err) => {
+            this.output = err.response.data.errorMessage;
+          }
+        );
     },
 
     shareCode() {
