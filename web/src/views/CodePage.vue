@@ -243,6 +243,7 @@ export default {
         line: true,
         mode: "text/x-go",
         theme: "hopscotch",
+        readOnly: "nocursor",
       },
       code: "",
       id: "",
