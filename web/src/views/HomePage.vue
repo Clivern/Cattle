@@ -307,6 +307,26 @@ export default {
     shareCode() {
       this.output = "sit tight while we store your code ...";
       this.loading();
+
+      this.$store
+        .dispatch("api/post", {
+          uri: "/api/v1/code",
+          request: {
+            content: this.code,
+            language: this.form.lang,
+            version: this.form.version,
+          },
+        })
+        .then(
+          (response) => {
+
+          },
+          (err) => {
+            // TODO: Fix this
+            this.output = err.response.data.errorMessage;
+            this.loader.ref.close();
+          }
+        );
     },
 
     onChange() {
