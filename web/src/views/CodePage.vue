@@ -2,6 +2,6 @@
 
 <template>
   <div class="code_page">
-    <h2>500 Error</h2>
+    <h2>Code Page</h2>
   </div>
 </template>

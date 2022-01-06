@@ -239,6 +239,7 @@ export default {
 
     runCode() {
       this.output = "sit tight while we run your code ...";
+      this.loading();
 
       this.$store
         .dispatch("api/post", {
@@ -276,28 +277,36 @@ export default {
                         response.data.result.execution_time +
                         " Milliseconds\n";
                       this.output += "\n";
+
+                      this.loader.ref.close();
                       clearInterval(timer);
                     }
 
                     if (status == "FAILED") {
                       // TODO: Add Failed Message
+                      this.loader.ref.close();
                       clearInterval(timer);
                     }
                   },
                   (err) => {
+                    // TODO: Fix this
                     this.output = err.response.data.errorMessage;
+                    this.loader.ref.close();
                   }
                 );
             }, 2000);
           },
           (err) => {
+            // TODO: Fix this
             this.output = err.response.data.errorMessage;
+            this.loader.ref.close();
           }
         );
     },
 
     shareCode() {
       this.output = "sit tight while we store your code ...";
+      this.loading();
     },
 
     onChange() {
