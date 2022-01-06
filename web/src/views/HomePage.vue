@@ -262,16 +262,19 @@ export default {
 
                     if (status == "SUCCEEDED") {
                       this.output = response.data.result.output;
-
                       this.output += "\n\n----\n";
-                      this.output +=
-                        "Build Time: " +
-                        response.data.result.build_time +
-                        " msec\n";
+
+                      if (response.data.result.build_time != null) {
+                        this.output +=
+                          "Build Time: " +
+                          response.data.result.build_time +
+                          " Milliseconds\n";
+                      }
+
                       this.output +=
                         "Execution Time: " +
                         response.data.result.execution_time +
-                        " msec\n";
+                        " Milliseconds\n";
                       this.output += "\n";
                       clearInterval(timer);
                     }
@@ -326,7 +329,7 @@ public class Main {
     /**
      * @param args The command line arguments.
      **/
-    public static void main(String []args){
+    public static void main(String []args) {
         System.out.println("Hello, world!");
     }
 }
