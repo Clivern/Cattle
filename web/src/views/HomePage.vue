@@ -238,7 +238,7 @@ export default {
     },
 
     runCode() {
-      this.output = "sit tight while we run your code ...";
+      this.output = "Sit tight while we run your code ...";
       this.loading();
 
       this.$store
@@ -305,7 +305,7 @@ export default {
     },
 
     shareCode() {
-      this.output = "sit tight while we store your code ...";
+      this.output = "Sit tight while we store your code ...";
       this.loading();
 
       this.$store
@@ -319,11 +319,26 @@ export default {
         })
         .then(
           (response) => {
+            // Store the token
+            let slug = response.data.slug;
+            let token = response.data.token;
 
+            // Store token
+            localStorage.setItem("item_" + slug + "_token", token);
+            this.loader.ref.close();
+
+            // Redirect to item url
+            this.$router.push("/p/" + slug);
           },
           (err) => {
             // TODO: Fix this
-            this.output = err.response.data.errorMessage;
+            this.output = "";
+
+            this.$buefy.toast.open({
+              message: err.response.data.errorMessage,
+              type: "is-danger",
+            });
+
             this.loader.ref.close();
           }
         );
