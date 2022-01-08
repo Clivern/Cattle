@@ -49,7 +49,7 @@ def execute_code(engine, output):
 class Snippet():
     """Snippet Class"""
 
-    def __init__(self, id, content, language, version, timeout=30):
+    def __init__(self, id, content, language, version, timeout=60):
         self._id = id
         self._content = content
         self._language = language
@@ -109,7 +109,11 @@ class Snippet():
         p.start()
         p.join(timeout=self._timeout)
         p.terminate()
-        engine.cleanup()
+
+        try:
+            engine.cleanup()
+        except Exception as e:
+            self.logger.warning("Error while doing cleanup: {}".format(str(e)));
 
         # Code is damn slow
         if p.exitcode is None:
