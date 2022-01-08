@@ -113,7 +113,7 @@ class Snippet():
         try:
             engine.cleanup()
         except Exception as e:
-            self.logger.warning("Error while doing cleanup: {}".format(str(e)));
+            self.logger.warning("Error while doing cleanup: {}".format(str(e)))
 
         # Code is damn slow
         if p.exitcode is None:
