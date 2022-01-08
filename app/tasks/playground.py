@@ -69,7 +69,11 @@ def run(task_id):
         result = snippet.run()
         logger.info("Task with uuid {} succeeded".format(task.uuid))
     except Exception as e:
-        result = None
+        result = {
+            "output": "Failed to run the code",
+            "build_time": None,
+            "execution_time": None,
+        }
         status = TaskRepository.FAILED
         logger.error("Task with uuid {} failed: {}".format(task.uuid, str(e)))
 
