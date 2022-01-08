@@ -302,7 +302,9 @@ export default {
                     }
 
                     if (status == "FAILED") {
-                      // TODO: Add Failed Message
+                      this.output = response.data.result.output;
+                      this.output += "\n";
+
                       this.loader.ref.close();
                       clearInterval(timer);
                     }
@@ -401,7 +403,9 @@ export default {
                           }
 
                           if (status == "FAILED") {
-                            // TODO: Add Failed Message
+                            this.output = response.data.result.output;
+                            this.output += "\n";
+
                             this.loader.ref.close();
                             clearInterval(timer);
                           }
