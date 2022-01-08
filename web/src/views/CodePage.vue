@@ -288,10 +288,13 @@ export default {
                           " Milliseconds\n";
                       }
 
-                      this.output +=
-                        "Execution Time: " +
-                        response.data.result.execution_time +
-                        " Milliseconds\n";
+                      if (response.data.result.execution_time != null) {
+                        this.output +=
+                          "Execution Time: " +
+                          response.data.result.execution_time +
+                          " Milliseconds\n";
+                      }
+
                       this.output += "\n";
 
                       this.loader.ref.close();
@@ -384,10 +387,13 @@ export default {
                                 " Milliseconds\n";
                             }
 
-                            this.output +=
-                              "Execution Time: " +
-                              response.data.result.execution_time +
-                              " Milliseconds\n";
+                            if (response.data.result.execution_time != null) {
+                              this.output +=
+                                "Execution Time: " +
+                                response.data.result.execution_time +
+                                " Milliseconds\n";
+                            }
+
                             this.output += "\n";
 
                             this.loader.ref.close();
