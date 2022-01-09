@@ -9,4 +9,4 @@ requests==2.27.1
 pindo==0.3.0
 mysqlclient==2.1.0
 newrelic==7.2.4.171
-unixsig==0.1.1
+unixsig==0.1.2
