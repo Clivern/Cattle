@@ -28,6 +28,8 @@
                   <option value="python">Python</option>
                   <option value="ruby">Ruby</option>
                   <option value="rust">Rust</option>
+                  <option value="c">C</option>
+                  <option value="cplus">C++</option>
                 </b-select>
               </b-field>
 
@@ -126,6 +128,24 @@
                     <option value="1.55.0">1.55.0</option>
                     <option value="1.56.0">1.56.0</option>
                     <option value="1.57.0">1.57.0</option>
+                  </b-select>
+                </b-field>
+              </template>
+
+              <!-- If C Selected -->
+              <template v-if="form.lang == 'c'">
+                <b-field>
+                  <b-select v-model="form.version" placeholder="Select Version">
+                    <option value="9.4.0">GCC 9.4.0</option>
+                  </b-select>
+                </b-field>
+              </template>
+
+              <!-- If C++ Selected -->
+              <template v-if="form.lang == 'cplus'">
+                <b-field>
+                  <b-select v-model="form.version" placeholder="Select Version">
+                    <option value="9.4.0">GCC 9.4.0</option>
                   </b-select>
                 </b-field>
               </template>
@@ -363,7 +383,7 @@ export default {
     resetEditor() {
       // Reset Editor Settings
       let lang = this.$route.query.lang || this.form.lang;
-      let langs = ["java", "php", "python", "ruby", "go", "rust"];
+      let langs = ["java", "php", "python", "ruby", "go", "rust", "c", "cplus"];
 
       this.output = "Hello, world!";
 
@@ -449,6 +469,36 @@ fn main() {
 }
 `;
         this.cmOption.mode = "text/x-rustsrc";
+      }
+
+      if (this.form.lang == "c") {
+        this.form.version = "9.4.0";
+        this.code = `// You can edit this code!
+// Click here and start typing...
+
+#include <stdio.h>
+
+int main() {
+    printf("Hello, world!");
+    return 0;
+}
+`;
+        this.cmOption.mode = "text/x-java";
+      }
+
+      if (this.form.lang == "cplus") {
+        this.form.version = "9.4.0";
+        this.code = `// You can edit this code!
+// Click here and start typing...
+
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, world!";
+    return 0;
+}
+`;
+        this.cmOption.mode = "text/x-java";
       }
     },
   },
