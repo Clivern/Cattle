@@ -7,7 +7,7 @@ info:
   license:
     name: Apache License 2.0
     url: https://github.com/Clivern/Cattle/blob/main/LICENSE
-  version: 1.0.0
+  version: 1.0.1
 externalDocs:
   description: Find out more about cattle
   url: https://github.com/Clivern/Cattle
