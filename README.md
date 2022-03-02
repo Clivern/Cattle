@@ -9,12 +9,12 @@
     </p>
 </p>
 
-Cattle is a `Django` based web application. It uses `MySQL` as a datastore, `Redis` for Async workload and `Docker` with [Gvisor](https://github.com/google/gvisor) to spin isolated environments to run the code.
+Cattle is a `django` based web application. It uses `mysql` as a datastore, `redis` for Async workload and `docker` with [gvisor](https://github.com/google/gvisor) to spin isolated environments to run the code.
 
 
 ## Deployment
 
-You can either deploy it Manually or [use Terraform & Ansible to deploy Cattle on Digitalocean](https://github.com/Clivern/Cattle/tree/main/deployment/ubuntu)
+You can either deploy it manually or [use terraform & ansible to deploy cattle on digitalocean](https://github.com/Clivern/Cattle/tree/main/deployment/ubuntu)
 
 
 ## Versioning
