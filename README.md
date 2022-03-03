@@ -14,7 +14,7 @@ Cattle is a `django` based web application. It uses `mysql` as a datastore, `red
 
 ## Deployment
 
-You can either deploy it manually or [use terraform & ansible to deploy cattle on digitalocean](https://github.com/Clivern/Cattle/tree/main/deployment/ubuntu)
+You can either deploy it manually like glamorous old days or [use terraform & ansible to deploy cattle on digitalocean or other cloud providers](https://github.com/Clivern/Cattle/tree/main/deployment/ubuntu).
 
 
 ## Versioning
