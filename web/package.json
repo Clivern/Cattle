@@ -11,10 +11,10 @@
     "axios": "0.27.2",
     "buefy": "0.9.21",
     "core-js": "3.22.7",
-    "vue": "2.6.14",
+    "vue": "3.2.36",
     "vue-codemirror": "^4.0.6",
-    "vue-router": "3.5.4",
-    "vuex": "3.6.2"
+    "vue-router": "4.0.15",
+    "vuex": "4.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.4",
