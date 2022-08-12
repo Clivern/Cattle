@@ -30,6 +30,7 @@
                   <option value="rust">Rust</option>
                   <option value="c">C</option>
                   <option value="cplus">C++</option>
+                  <option value="elixir">Elixir</option>
                 </b-select>
               </b-field>
 
@@ -117,6 +118,22 @@
                     <option value="2.7.4">2.7.4</option>
                     <option value="2.7.5">2.7.5</option>
                     <option value="3.0.0">3.0.0</option>
+                  </b-select>
+                </b-field>
+              </template>
+
+              <!-- If Ruby Selected -->
+              <template v-if="form.lang == 'elixir'">
+                <b-field>
+                  <b-select v-model="form.version" placeholder="Select Version">
+                    <option value="1.7.4">1.7.4</option>
+                    <option value="1.8.2">1.8.2</option>
+                    <option value="1.9.4">1.9.4</option>
+                    <option value="1.10.4">1.10.4</option>
+                    <option value="1.11.4">1.11.4</option>
+                    <option value="1.12.3">1.12.3</option>
+                    <option value="1.13.4">1.13.4</option>
+                    <option value="1.14.2">1.14.2</option>
                   </b-select>
                 </b-field>
               </template>
@@ -225,6 +242,7 @@ import "codemirror/mode/clike/clike.js";
 import "codemirror/mode/python/python.js";
 import "codemirror/mode/ruby/ruby.js";
 import "codemirror/mode/php/php.js";
+import "codemirror/mode/erlang/erlang.js";
 import "codemirror/theme/hopscotch.css";
 
 export default {
@@ -386,7 +404,7 @@ export default {
     resetEditor() {
       // Reset Editor Settings
       let lang = this.$route.query.lang || this.form.lang;
-      let langs = ["java", "php", "python", "ruby", "go", "rust", "c", "cplus"];
+      let langs = ["java", "php", "python", "ruby", "go", "rust", "c", "cplus", "elixir"];
 
       this.output = "Hello, world!";
 
@@ -442,6 +460,16 @@ print("Hello, world!")
 puts "Hello, world!"
 `;
         this.cmOption.mode = "text/x-ruby";
+      }
+
+      if (this.form.lang == "elixir") {
+        this.form.version = "1.14.2";
+        this.code = `# You can edit this code!
+# Click here and start typing...
+
+IO.puts "Hello, world!"
+`;
+        this.cmOption.mode = "text/x-erlang";
       }
 
       if (this.form.lang == "go") {

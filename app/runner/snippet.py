@@ -90,6 +90,9 @@ class Snippet():
         elif self._language == "ruby":
             code = Runner.ruby(self._content, self._version, self._id)
 
+        elif self._language == "elixir":
+            code = Runner.elixir(self._content, self._version, self._id)
+
         elif self._language == "python":
             code = Runner.python(self._content, self._version, self._id)
 
