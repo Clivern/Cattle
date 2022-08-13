@@ -13,7 +13,7 @@
 </p>
 <br/>
 <p align="center">
-    <img src="/assets/img/screenshot.png?v=0.1.0" width="100%" />
+    <img src="/assets/img/screenshot.png?v=1.3.0" width="100%" />
 </p>
 
 
