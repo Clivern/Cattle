@@ -24,7 +24,7 @@ jobs:
 
       - name: Update requirements.freeze.txt
         run: |
-          pip freeze > requirements.freeze.txt
+          pip freeze > requirements.freeze.txt && echo >> requirements.freeze.txt
 
       - name: Commit and push changes
         run: |
