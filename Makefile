@@ -6,7 +6,6 @@ FLAKE8 ?= flake8
 NPM          ?= npm
 NPX          ?= npx
 GUNICORN     ?= gunicorn
-PRECOMMIT    ?= pre-commit
 
 
 help: Makefile
@@ -160,16 +159,9 @@ package:
 	$(PYTHON) manage.py build_ui
 
 
-## precommit: Run pre-commit hooks
-.PHONY: precommit
-precommit:
-	$(PRECOMMIT) install
-	$(PRECOMMIT) run --all-files
-
-
 ## ci: Run all CI tests.
 .PHONY: ci
-ci: coverage lint precommit outdated-pkg
+ci: coverage lint outdated-pkg
 	@echo "\n>> ============= All quality checks passed ============= <<"
 
 
