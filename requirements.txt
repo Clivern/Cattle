@@ -8,5 +8,5 @@ jsonschema==4.17.3
 requests==2.28.2
 pindo==1.2.0
 mysqlclient==2.1.1
-newrelic==8.7.0
+newrelic==8.7.1
 unixsig==0.1.4
