@@ -5,7 +5,7 @@ whitenoise==6.4.0
 Faker==18.9.0
 django-rq==2.8.1
 jsonschema==4.17.3
-requests==2.30.0
+requests==2.31.0
 pindo==1.2.0
 mysqlclient==2.1.1
 newrelic==8.8.0
