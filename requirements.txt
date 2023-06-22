@@ -7,6 +7,6 @@ django-rq==2.8.1
 jsonschema==4.17.3
 requests==2.31.0
 pindo==1.2.0
-mysqlclient==2.1.1
+mysqlclient==2.2.0
 newrelic==8.8.0
 unixsig==0.1.4
