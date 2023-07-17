@@ -1,5 +1,5 @@
 Django==3.2.20
-gunicorn==21.0.0
+gunicorn==21.0.1
 python-dotenv==1.0.0
 whitenoise==6.5.0
 Faker==19.1.0
