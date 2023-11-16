@@ -4,7 +4,7 @@ python-dotenv==1.0.0
 whitenoise==6.6.0
 Faker==20.0.3
 django-rq==2.8.1
-jsonschema==4.19.2
+jsonschema==4.20.0
 requests==2.31.0
 pindo==1.2.0
 mysqlclient==2.2.0
