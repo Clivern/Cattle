@@ -24,7 +24,7 @@
     "babel-eslint": "10.1.0",
     "eslint": "7.32.0",
     "eslint-plugin-vue": "9.19.2",
-    "prettier": "3.1.0",
+    "prettier": "3.1.1",
     "vue-template-compiler": "2.7.15"
   },
   "eslintConfig": {
