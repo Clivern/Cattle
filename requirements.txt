@@ -2,7 +2,7 @@ Django==3.2.25
 gunicorn==22.0.0
 python-dotenv==1.0.1
 whitenoise==6.7.0
-Faker==26.2.0
+Faker==26.3.0
 django-rq==2.10.2
 jsonschema==4.23.0
 requests==2.32.3
