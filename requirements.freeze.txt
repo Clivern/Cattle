@@ -1,6 +1,6 @@
 asgiref==3.8.1
 attrs==24.2.0
-certifi==2024.7.4
+certifi==2024.8.30
 charset-normalizer==3.3.2
 click==8.1.7
 Django==3.2.25
@@ -8,7 +8,7 @@ django-rq==2.10.2
 docker==7.1.0
 Faker==26.3.0
 gunicorn==22.0.0
-idna==3.7
+idna==3.8
 jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
 mysqlclient==2.2.4
@@ -28,3 +28,4 @@ sqlparse==0.5.1
 unixsig==0.1.4
 urllib3==2.2.2
 whitenoise==6.7.0
+
