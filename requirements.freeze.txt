@@ -26,5 +26,5 @@ rq==1.16.2
 six==1.16.0
 sqlparse==0.5.1
 unixsig==0.1.4
-urllib3==2.2.2
+urllib3==2.2.3
 whitenoise==6.7.0
