@@ -6,7 +6,7 @@ click==8.1.7
 Django==3.2.25
 django-rq==2.10.2
 docker==7.1.0
-Faker==30.0.0
+Faker==30.1.0
 gunicorn==22.0.0
 idna==3.10
 jsonschema==4.23.0
