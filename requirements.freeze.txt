@@ -25,6 +25,7 @@ rpds-py==0.20.0
 rq==1.16.2
 six==1.16.0
 sqlparse==0.5.1
+typing_extensions==4.12.2
 unixsig==0.1.4
 urllib3==2.2.3
 whitenoise==6.7.0
