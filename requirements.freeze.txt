@@ -18,7 +18,7 @@ pindo==1.2.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pytz==2024.2
-redis==5.1.0
+redis==5.1.1
 referencing==0.35.1
 requests==2.32.3
 rpds-py==0.20.0
