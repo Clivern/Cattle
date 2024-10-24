@@ -3,7 +3,7 @@ attrs==24.2.0
 certifi==2024.8.30
 charset-normalizer==3.4.0
 click==8.1.7
-Django==3.2.25
+Django==4.2.16
 django-rq==2.10.2
 docker==7.1.0
 Faker==30.8.0
