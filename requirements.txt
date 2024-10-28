@@ -3,7 +3,7 @@ gunicorn==22.0.0
 python-dotenv==1.0.1
 whitenoise==6.7.0
 Faker==30.8.0
-django-rq==2.10.2
+django-rq==3.0.0
 jsonschema==4.23.0
 requests==2.32.3
 pindo==1.2.0
