@@ -13,7 +13,7 @@ jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
 mysqlclient==2.2.5
 newrelic==10.2.0
-packaging==24.1
+packaging==24.2
 pindo==1.2.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
