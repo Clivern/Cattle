@@ -24,7 +24,7 @@ requests==2.32.3
 rpds-py==0.21.0
 rq==1.16.2
 six==1.16.0
-sqlparse==0.5.1
+sqlparse==0.5.2
 typing_extensions==4.12.2
 unixsig==0.1.4
 urllib3==2.2.3
