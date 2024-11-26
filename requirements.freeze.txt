@@ -28,4 +28,4 @@ sqlparse==0.5.2
 typing_extensions==4.12.2
 unixsig==0.1.4
 urllib3==2.2.3
-whitenoise==6.7.0
+whitenoise==6.8.2
