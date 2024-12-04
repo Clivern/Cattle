@@ -23,7 +23,7 @@ referencing==0.35.1
 requests==2.32.3
 rpds-py==0.22.1
 rq==1.16.2
-six==1.16.0
+six==1.17.0
 sqlparse==0.5.2
 typing_extensions==4.12.2
 unixsig==0.1.4
