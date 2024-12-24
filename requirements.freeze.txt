@@ -1,7 +1,7 @@
 asgiref==3.8.1
 attrs==24.3.0
 certifi==2024.12.14
-charset-normalizer==3.4.0
+charset-normalizer==3.4.1
 click==8.1.8
 Django==3.2.25
 django-rq==2.10.3
