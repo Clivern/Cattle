@@ -12,7 +12,7 @@ idna==3.10
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
 mysqlclient==2.2.7
-newrelic==10.4.0
+newrelic==10.5.0
 packaging==24.2
 pindo==1.2.0
 python-dateutil==2.9.0.post0
