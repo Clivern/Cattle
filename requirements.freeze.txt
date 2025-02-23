@@ -21,7 +21,7 @@ pytz==2025.1
 redis==5.2.1
 referencing==0.36.2
 requests==2.32.3
-rpds-py==0.22.3
+rpds-py==0.23.1
 rq==1.16.2
 six==1.17.0
 sqlparse==0.5.3
