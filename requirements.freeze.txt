@@ -17,7 +17,7 @@ packaging==24.2
 pindo==1.2.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
-pytz==2025.1
+pytz==2025.2
 redis==5.2.1
 referencing==0.36.2
 requests==2.32.3
