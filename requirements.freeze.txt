@@ -13,7 +13,7 @@ jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
 mysqlclient==2.2.7
 newrelic==10.9.0
-packaging==24.2
+packaging==25.0
 pindo==1.2.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
@@ -21,11 +21,11 @@ pytz==2025.2
 redis==5.2.1
 referencing==0.36.2
 requests==2.32.3
-rpds-py==0.23.1
+rpds-py==0.24.0
 rq==1.16.2
 six==1.17.0
 sqlparse==0.5.3
-typing_extensions==4.12.2
+typing_extensions==4.13.2
 unixsig==0.1.4
-urllib3==2.3.0
+urllib3==2.4.0
 whitenoise==6.7.0
