@@ -10,7 +10,7 @@ Faker==35.2.2
 gunicorn==23.0.0
 idna==3.10
 jsonschema==4.23.0
-jsonschema-specifications==2024.10.1
+jsonschema-specifications==2025.4.1
 mysqlclient==2.2.7
 newrelic==10.9.0
 packaging==25.0
