@@ -27,5 +27,5 @@ six==1.17.0
 sqlparse==0.5.3
 typing_extensions==4.13.2
 unixsig==0.1.4
-urllib3==2.4.0
+urllib3==2.5.0
 whitenoise==6.7.0
