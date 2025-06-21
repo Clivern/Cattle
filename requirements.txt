@@ -1,4 +1,4 @@
-Django==3.2.25
+Django==4.2.22
 gunicorn==23.0.0
 python-dotenv==1.0.1
 whitenoise==6.7.0
