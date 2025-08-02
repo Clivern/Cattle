@@ -2,7 +2,7 @@ asgiref==3.8.1
 attrs==25.3.0
 certifi==2025.6.15
 charset-normalizer==3.4.2
-click==8.2.1
+click==8.2.2
 Django==3.2.25
 django-rq==2.10.3
 docker==7.1.0
