@@ -5,7 +5,7 @@ charset-normalizer==3.4.2
 click==8.2.1
 Django==3.2.25
 django-rq==2.10.3
-docker==7.1.0
+docker==7.2.0
 Faker==35.2.2
 gunicorn==23.0.0
 idna==3.10
